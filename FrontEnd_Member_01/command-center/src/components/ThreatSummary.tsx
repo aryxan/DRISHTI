@@ -35,7 +35,7 @@ export const ThreatSummary: React.FC = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full">
       {/* Floating Card 1: System Threat Posture */}
-      <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
+      <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0">
           <span className="text-[10px] font-mono tracking-wider uppercase text-slate-500 font-semibold truncate">
             SYSTEM POSTURE
@@ -50,7 +50,7 @@ export const ThreatSummary: React.FC = () => {
       </div>
 
       {/* Floating Card 2: Average Threat Score */}
-      <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
+      <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0">
           <span className="text-[10px] font-mono tracking-wider uppercase text-slate-500 font-semibold truncate">
             AVG THREAT SCORE
@@ -62,13 +62,13 @@ export const ThreatSummary: React.FC = () => {
             <span className="text-xs text-slate-400 font-mono font-medium">/100</span>
           </div>
         </div>
-        <div className="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 shrink-0 shadow-2xs">
+        <div className="p-2.5 rounded-xl bg-slate-200/80 border border-slate-300/80 text-slate-700 shrink-0 shadow-2xs">
           <Zap className="w-5 h-5" />
         </div>
       </div>
 
       {/* Floating Card 3: Critical Alerts */}
-      <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
+      <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0">
           <span className="text-[10px] font-mono tracking-wider uppercase text-red-600 font-semibold truncate">
             CRITICAL ALERTS
@@ -88,7 +88,7 @@ export const ThreatSummary: React.FC = () => {
       </div>
 
       {/* Floating Card 4: High Alerts */}
-      <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
+      <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0">
           <span className="text-[10px] font-mono tracking-wider uppercase text-amber-600 font-semibold truncate">
             HIGH ALERTS
@@ -108,7 +108,7 @@ export const ThreatSummary: React.FC = () => {
       </div>
 
       {/* Floating Card 5: Active Target Tracks */}
-      <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
+      <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0">
           <span className="text-[10px] font-mono tracking-wider uppercase text-slate-500 font-semibold truncate">
             ACTIVE TRACKS
@@ -117,12 +117,12 @@ export const ThreatSummary: React.FC = () => {
             <span className="text-2xl font-black text-slate-900 font-mono tracking-tight">
               {threatSummary.active_tracks}
             </span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 font-bold">
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 border border-slate-300 font-bold">
               LIVE
             </span>
           </div>
         </div>
-        <div className="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 shrink-0 shadow-2xs">
+        <div className="p-2.5 rounded-xl bg-slate-200/80 border border-slate-300/80 text-slate-700 shrink-0 shadow-2xs">
           <Users className="w-5 h-5" />
         </div>
       </div>

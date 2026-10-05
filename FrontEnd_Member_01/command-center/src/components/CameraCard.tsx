@@ -52,10 +52,10 @@ export const CameraCard: React.FC<CameraCardProps> = ({
   return (
     <div
       onClick={() => onSelect?.(camera)}
-      className={`group relative bg-white border rounded-xl overflow-hidden transition-all duration-200 cursor-pointer flex flex-col shadow-xs ${
+      className={`group relative bg-slate-100 border rounded-xl overflow-hidden transition-all duration-200 cursor-pointer flex flex-col shadow-xs ${
         isSelected
-          ? 'border-slate-900 ring-2 ring-slate-900/20 shadow-md'
-          : 'border-slate-200 hover:border-slate-300 hover:shadow-sm'
+          ? 'border-slate-900 ring-2 ring-slate-900/25 shadow-md bg-slate-200/80'
+          : 'border-slate-200/90 hover:border-slate-300 hover:bg-slate-100/80 hover:shadow-sm'
       }`}
     >
       {/* Video Viewport Area */}
@@ -132,7 +132,7 @@ export const CameraCard: React.FC<CameraCardProps> = ({
       </div>
 
       {/* Card Metadata Footer */}
-      <div className="p-3.5 bg-white border-t border-slate-200 flex flex-col gap-1.5 flex-1 justify-between">
+      <div className="p-3.5 bg-slate-100 border-t border-slate-200 flex flex-col gap-1.5 flex-1 justify-between">
         <div>
           <div className="flex items-center justify-between">
             <h4 className="text-xs font-bold text-slate-900 truncate group-hover:text-slate-700 transition-colors">
@@ -146,14 +146,14 @@ export const CameraCard: React.FC<CameraCardProps> = ({
         </div>
 
         {/* Latest Event Pill */}
-        <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px]">
+        <div className="pt-2 border-t border-slate-200/80 flex items-center justify-between text-[10px]">
           <div className="flex items-center gap-1 text-slate-600 font-mono">
             <Zap className="w-3 h-3 text-amber-600" />
             <span className="text-slate-700 capitalize font-medium">
               {camera.latest_event_type.replace('_', ' ')}
             </span>
           </div>
-          <span className="text-slate-400 font-mono">{formattedEventTime}</span>
+          <span className="text-slate-500 font-mono">{formattedEventTime}</span>
         </div>
       </div>
     </div>
