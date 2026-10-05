@@ -32,19 +32,19 @@ export const AppShell: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-black">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-slate-200 selection:text-slate-900">
       {/* Top Bar with SystemStatus, CurrentTime, and UserMenu */}
       <TopBar onOpenHealthModal={() => setIsHealthModalOpen(true)} />
 
       {/* Secondary Tactical Navigation Bar */}
-      <nav className="bg-[#0b101c] border-b border-slate-800/80 px-4 md:px-6 py-2 flex items-center justify-between gap-3 overflow-x-auto select-none">
-        <div className="flex items-center gap-1.5 text-xs font-mono">
+      <nav className="bg-white border-b border-slate-200 px-4 md:px-6 py-2.5 flex items-center justify-between gap-3 overflow-x-auto select-none shadow-2xs">
+        <div className="flex items-center gap-2 text-xs font-mono">
           <button
             onClick={() => setActiveView('all')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
               activeView === 'all'
-                ? 'bg-cyan-950/80 border-cyan-500 text-cyan-300 font-bold shadow-sm shadow-cyan-950'
-                : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                ? 'bg-slate-900 border-slate-900 text-white font-semibold shadow-xs'
+                : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
             }`}
           >
             <LayoutDashboard className="w-3.5 h-3.5" />
@@ -53,10 +53,10 @@ export const AppShell: React.FC = () => {
 
           <button
             onClick={() => setActiveView('cameras')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
               activeView === 'cameras'
-                ? 'bg-cyan-950/80 border-cyan-500 text-cyan-300 font-bold shadow-sm shadow-cyan-950'
-                : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                ? 'bg-slate-900 border-slate-900 text-white font-semibold shadow-xs'
+                : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
             }`}
           >
             <Grid className="w-3.5 h-3.5" />
@@ -65,10 +65,10 @@ export const AppShell: React.FC = () => {
 
           <button
             onClick={() => setActiveView('map')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
               activeView === 'map'
-                ? 'bg-cyan-950/80 border-cyan-500 text-cyan-300 font-bold shadow-sm shadow-cyan-950'
-                : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                ? 'bg-slate-900 border-slate-900 text-white font-semibold shadow-xs'
+                : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
             }`}
           >
             <Compass className="w-3.5 h-3.5" />
@@ -77,25 +77,25 @@ export const AppShell: React.FC = () => {
 
           <button
             onClick={() => setActiveView('incidents')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
               activeView === 'incidents'
-                ? 'bg-cyan-950/80 border-cyan-500 text-cyan-300 font-bold shadow-sm shadow-cyan-950'
-                : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                ? 'bg-slate-900 border-slate-900 text-white font-semibold shadow-xs'
+                : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
             }`}
           >
-            <ShieldAlert className="w-3.5 h-3.5 text-rose-400" />
+            <ShieldAlert className="w-3.5 h-3.5 text-rose-500" />
             <span>INCIDENT QUEUE</span>
           </button>
 
           <button
             onClick={() => setActiveView('timeline')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
               activeView === 'timeline'
-                ? 'bg-cyan-950/80 border-cyan-500 text-cyan-300 font-bold shadow-sm shadow-cyan-950'
-                : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                ? 'bg-slate-900 border-slate-900 text-white font-semibold shadow-xs'
+                : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
             }`}
           >
-            <Clock className="w-3.5 h-3.5 text-amber-400" />
+            <Clock className="w-3.5 h-3.5 text-amber-500" />
             <span>EVENT TIMELINE</span>
           </button>
         </div>
@@ -104,7 +104,7 @@ export const AppShell: React.FC = () => {
           {!isAuthenticated ? (
             <button
               onClick={() => setIsLoginModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-mono text-xs font-semibold"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs font-semibold shadow-xs cursor-pointer"
             >
               <LogIn className="w-3.5 h-3.5" />
               Sign In
@@ -112,9 +112,9 @@ export const AppShell: React.FC = () => {
           ) : (
             <button
               onClick={() => setIsHealthModalOpen(true)}
-              className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700 rounded-lg bg-slate-900/80 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-slate-700 hover:text-slate-900 border border-slate-200 rounded-lg bg-slate-100 hover:bg-slate-200 transition-colors shadow-2xs cursor-pointer"
             >
-              <Activity className="w-3.5 h-3.5 text-cyan-400" />
+              <Activity className="w-3.5 h-3.5 text-slate-600" />
               Diagnostics
             </button>
           )}

@@ -25,12 +25,12 @@ export const CurrentTime: React.FC = () => {
   });
 
   return (
-    <div className="flex items-center gap-2.5 px-3 py-1 bg-slate-900/90 border border-slate-800 rounded-lg text-slate-300 font-mono text-xs">
-      <Clock className="w-3.5 h-3.5 text-cyan-400" />
+    <div className="flex items-center gap-2.5 px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-lg text-slate-700 font-mono text-xs shadow-2xs">
+      <Clock className="w-3.5 h-3.5 text-slate-500" />
       <div className="flex items-baseline gap-2">
-        <span className="font-semibold text-slate-100">{localTimeStr}</span>
+        <span className="font-bold text-slate-900">{localTimeStr}</span>
         <span className="text-slate-500 text-[10px]">({utcTimeStr})</span>
-        <span className="hidden md:inline text-slate-400 border-l border-slate-800 pl-2 text-[11px]">{dateStr}</span>
+        <span className="hidden md:inline text-slate-600 border-l border-slate-300 pl-2 text-[11px]">{dateStr}</span>
       </div>
     </div>
   );

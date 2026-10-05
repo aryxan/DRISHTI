@@ -34,19 +34,19 @@ export const MapPanel: React.FC = () => {
   };
 
   const zones = [
-    { name: 'ZONE ALPHA (NORTH PERIMETER)', x: 18, y: 10, w: 42, h: 22, color: 'border-rose-500/40 bg-rose-500/5' },
-    { name: 'ZONE BRAVO (SERVER VAULT)', x: 42, y: 38, w: 26, h: 26, color: 'border-amber-500/40 bg-amber-500/5' },
-    { name: 'ZONE CHARLIE (MAIN GATE / ACCESS)', x: 62, y: 60, w: 32, h: 30, color: 'border-cyan-500/40 bg-cyan-500/5' },
-    { name: 'ZONE DELTA (LOGISTICS YARD)', x: 8, y: 55, w: 30, h: 35, color: 'border-blue-500/40 bg-blue-500/5' },
+    { name: 'ZONE ALPHA (NORTH PERIMETER)', x: 18, y: 10, w: 42, h: 22, color: 'border-red-400/50 bg-red-500/5' },
+    { name: 'ZONE BRAVO (SERVER VAULT)', x: 42, y: 38, w: 26, h: 26, color: 'border-amber-400/50 bg-amber-500/5' },
+    { name: 'ZONE CHARLIE (MAIN GATE / ACCESS)', x: 62, y: 60, w: 32, h: 30, color: 'border-blue-400/50 bg-blue-500/5' },
+    { name: 'ZONE DELTA (LOGISTICS YARD)', x: 8, y: 55, w: 30, h: 35, color: 'border-emerald-400/50 bg-emerald-500/5' },
   ];
 
   return (
-    <div className="flex flex-col h-full bg-[#0a0f1d] border border-slate-800 rounded-xl overflow-hidden shadow-lg relative">
+    <div className="flex flex-col h-full bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs relative">
       {/* Header bar */}
-      <div className="px-4 py-3 bg-[#0d1424] border-b border-slate-800 flex items-center justify-between z-10">
+      <div className="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between z-10">
         <div className="flex items-center gap-2">
-          <Navigation className="w-4 h-4 text-cyan-400 rotate-45" />
-          <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
+          <Navigation className="w-4 h-4 text-slate-700 rotate-45" />
+          <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider font-mono">
             Tactical GIS Map & Spatial Radar
           </h3>
         </div>
@@ -55,10 +55,10 @@ export const MapPanel: React.FC = () => {
         <div className="flex items-center gap-2 text-xs font-mono">
           <button
             onClick={() => setShowZones(!showZones)}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded border transition-colors ${
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border transition-colors cursor-pointer ${
               showZones
-                ? 'bg-cyan-950 text-cyan-300 border-cyan-800'
-                : 'bg-slate-900 text-slate-500 border-slate-800'
+                ? 'bg-slate-900 text-white border-slate-900 shadow-2xs font-semibold'
+                : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-100'
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -66,10 +66,10 @@ export const MapPanel: React.FC = () => {
           </button>
           <button
             onClick={() => setShowIncidents(!showIncidents)}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded border transition-colors ${
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border transition-colors cursor-pointer ${
               showIncidents
-                ? 'bg-rose-950 text-rose-300 border-rose-800'
-                : 'bg-slate-900 text-slate-500 border-slate-800'
+                ? 'bg-red-700 text-white border-red-700 shadow-2xs font-semibold'
+                : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-100'
             }`}
           >
             <ShieldAlert className="w-3.5 h-3.5" />
@@ -79,22 +79,22 @@ export const MapPanel: React.FC = () => {
       </div>
 
       {/* Map Graphic Stage */}
-      <div className="relative flex-1 min-h-[360px] bg-[#070b14] overflow-hidden select-none">
+      <div className="relative flex-1 min-h-[360px] bg-slate-100/80 overflow-hidden select-none">
         {/* Tactical Grid Background */}
         <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
+          className="absolute inset-0 opacity-40 pointer-events-none"
           style={{
             backgroundImage:
-              'linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px)',
+              'linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)',
             backgroundSize: '40px 40px',
           }}
         />
 
         {/* Circular Radar Sweep Effect */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-25">
-          <div className="w-[500px] h-[500px] rounded-full border border-cyan-500/20 flex items-center justify-center">
-            <div className="w-[350px] h-[350px] rounded-full border border-cyan-500/20 flex items-center justify-center">
-              <div className="w-[200px] h-[200px] rounded-full border border-cyan-500/30" />
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
+          <div className="w-[500px] h-[500px] rounded-full border border-slate-300 flex items-center justify-center">
+            <div className="w-[350px] h-[350px] rounded-full border border-slate-300 flex items-center justify-center">
+              <div className="w-[200px] h-[200px] rounded-full border border-slate-300" />
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@ export const MapPanel: React.FC = () => {
                 height: `${zone.h}%`,
               }}
             >
-              <span className="text-[9px] font-mono tracking-wider text-slate-400 font-semibold bg-slate-950/80 px-1.5 py-0.5 rounded border border-slate-800">
+              <span className="text-[9px] font-mono tracking-wider text-slate-700 font-bold bg-white/95 px-1.5 py-0.5 rounded border border-slate-200 shadow-2xs">
                 {zone.name}
               </span>
             </div>
@@ -127,9 +127,9 @@ export const MapPanel: React.FC = () => {
           const isSelected = selectedCamera?.camera_id === camera.camera_id;
 
           const getStatusDotColor = () => {
-            if (camera.stream_status === 'online') return 'bg-emerald-400 border-emerald-300';
-            if (camera.stream_status === 'degraded') return 'bg-amber-400 border-amber-300';
-            return 'bg-rose-500 border-rose-300';
+            if (camera.stream_status === 'online') return 'bg-emerald-500 border-white';
+            if (camera.stream_status === 'degraded') return 'bg-amber-500 border-white';
+            return 'bg-red-500 border-white';
           };
 
           return (
@@ -153,17 +153,17 @@ export const MapPanel: React.FC = () => {
             >
               {/* Radar Ping animation if an incident is active at this camera */}
               {showIncidents && activeIncident && (
-                <div className="absolute -inset-3 rounded-full bg-rose-500/20 radar-ping pointer-events-none" />
+                <div className="absolute -inset-3 rounded-full bg-red-500/30 radar-ping pointer-events-none" />
               )}
 
               {/* Marker Icon */}
               <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center transition-transform hover:scale-125 border ${
+                className={`w-8 h-8 rounded-full flex items-center justify-center transition-transform hover:scale-125 border shadow-2xs ${
                   isSelected
-                    ? 'bg-cyan-500 text-black border-white shadow-lg shadow-cyan-400/50 scale-110'
+                    ? 'bg-slate-900 text-white border-slate-900 shadow-md scale-110'
                     : activeIncident
-                    ? 'bg-rose-950 text-rose-300 border-rose-500'
-                    : 'bg-slate-900 text-slate-300 border-slate-700 hover:border-cyan-400'
+                    ? 'bg-red-600 text-white border-red-700 shadow-sm'
+                    : 'bg-white text-slate-700 border-slate-300 hover:border-slate-800'
                 }`}
               >
                 <Camera className="w-4 h-4" />
@@ -174,7 +174,7 @@ export const MapPanel: React.FC = () => {
               </div>
 
               {/* Camera Name Tag */}
-              <div className="mt-1 px-1.5 py-0.5 bg-slate-950/90 border border-slate-800 rounded text-[9px] font-mono text-slate-300 whitespace-nowrap shadow text-center">
+              <div className="mt-1 px-1.5 py-0.5 bg-white/95 border border-slate-200 rounded text-[9px] font-mono text-slate-700 font-bold whitespace-nowrap shadow-2xs text-center">
                 {camera.camera_id.split('-')[0].toUpperCase()}
               </div>
             </div>
@@ -184,28 +184,28 @@ export const MapPanel: React.FC = () => {
         {/* Hover Tooltip Overlay */}
         {activeTooltip && activeTooltip.camera && (
           <div
-            className="absolute z-30 pointer-events-none bg-slate-900 border border-slate-700 rounded-lg p-2.5 shadow-2xl text-xs w-56 -translate-x-1/2 -translate-y-full mb-3"
+            className="absolute z-30 pointer-events-none bg-white border border-slate-200 rounded-xl p-3 shadow-xl text-xs w-60 -translate-x-1/2 -translate-y-full mb-3 text-slate-800"
             style={{
               left: `${Math.min(Math.max(activeTooltip.x, 15), 85)}%`,
               top: `${Math.max(activeTooltip.y - 4, 15)}%`,
             }}
           >
-            <div className="font-semibold text-slate-100 flex items-center justify-between">
+            <div className="font-bold text-slate-900 flex items-center justify-between">
               <span>{activeTooltip.camera.camera_name}</span>
-              <span className="text-[10px] uppercase font-mono text-cyan-400">
+              <span className="text-[10px] uppercase font-mono text-slate-500 font-semibold">
                 {activeTooltip.camera.stream_status}
               </span>
             </div>
-            <div className="text-[11px] text-slate-400 mt-0.5">
+            <div className="text-[11px] text-slate-500 mt-0.5">
               {activeTooltip.camera.location_name}
             </div>
-            <div className="mt-2 pt-1.5 border-t border-slate-800 text-[10px] font-mono flex items-center justify-between text-slate-300">
-              <span>{activeTooltip.camera.fps} FPS</span>
-              <span className="text-cyan-300">{activeTooltip.camera.active_track_count} ACTIVE TRACKS</span>
+            <div className="mt-2 pt-1.5 border-t border-slate-100 text-[10px] font-mono flex items-center justify-between text-slate-700">
+              <span className="font-medium">{activeTooltip.camera.fps} FPS</span>
+              <span className="text-slate-900 font-bold">{activeTooltip.camera.active_track_count} ACTIVE TRACKS</span>
             </div>
             {activeTooltip.incident && (
-              <div className="mt-1.5 pt-1.5 border-t border-rose-900/60 text-rose-300 font-mono text-[10px] flex items-center gap-1">
-                <ShieldAlert className="w-3 h-3 text-rose-400" />
+              <div className="mt-1.5 pt-1.5 border-t border-red-100 text-red-700 font-mono text-[10px] flex items-center gap-1 font-semibold">
+                <ShieldAlert className="w-3 h-3 text-red-600" />
                 <span>INCIDENT: {activeTooltip.incident.title}</span>
               </div>
             )}
@@ -213,8 +213,8 @@ export const MapPanel: React.FC = () => {
         )}
 
         {/* Compass Rose */}
-        <div className="absolute top-4 right-4 flex items-center gap-1.5 px-2 py-1 bg-slate-950/80 border border-slate-800 rounded font-mono text-[10px] text-slate-400">
-          <Compass className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 bg-white/90 border border-slate-200 rounded-lg font-mono text-[10px] text-slate-600 shadow-2xs font-medium">
+          <Compass className="w-3.5 h-3.5 text-slate-500" />
           <span>NORTH 000°</span>
         </div>
       </div>

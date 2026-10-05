@@ -16,12 +16,12 @@ export const CameraGrid: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col h-full bg-[#0a0f1d] border border-slate-800 rounded-xl overflow-hidden shadow-lg">
+    <div className="flex flex-col h-full bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs">
       {/* Header bar for Camera Wall */}
-      <div className="px-4 py-3 bg-[#0d1424] border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
+      <div className="px-4 py-3 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <Video className="w-4 h-4 text-cyan-400" />
-          <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
+          <Video className="w-4 h-4 text-slate-700" />
+          <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider font-mono">
             Live Camera Matrix ({filteredCameras.length}/{cameras.length})
           </h3>
         </div>
@@ -31,40 +31,40 @@ export const CameraGrid: React.FC = () => {
           {spotlightCamera && (
             <button
               onClick={() => setSpotlightCamera(null)}
-              className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-800 border border-slate-300 transition-colors font-medium cursor-pointer"
             >
               <Minimize2 className="w-3.5 h-3.5" />
               Exit Spotlight
             </button>
           )}
 
-          <div className="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5 text-xs font-mono">
+          <div className="flex items-center bg-slate-200/70 border border-slate-300 rounded-lg p-0.5 text-xs font-mono">
             <button
               onClick={() => setFilter('all')}
-              className={`px-2 py-1 rounded transition-colors ${
+              className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
                 filter === 'all'
-                  ? 'bg-cyan-950 text-cyan-300 font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-white text-slate-900 font-bold shadow-2xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               ALL
             </button>
             <button
               onClick={() => setFilter('online')}
-              className={`px-2 py-1 rounded transition-colors ${
+              className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
                 filter === 'online'
-                  ? 'bg-cyan-950 text-cyan-300 font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-emerald-600 text-white font-bold shadow-2xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               ONLINE
             </button>
             <button
               onClick={() => setFilter('attention')}
-              className={`px-2 py-1 rounded transition-colors ${
+              className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
                 filter === 'attention'
-                  ? 'bg-amber-950 text-amber-300 font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-amber-600 text-white font-bold shadow-2xs'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               ACTIVE EVENTS
@@ -85,8 +85,8 @@ export const CameraGrid: React.FC = () => {
                 onFocus={() => setSpotlightCamera(null)}
               />
             </div>
-            <div className="border-t border-slate-800 pt-3">
-              <h4 className="text-xs font-mono uppercase text-slate-400 mb-2">
+            <div className="border-t border-slate-200 pt-3">
+              <h4 className="text-xs font-mono uppercase text-slate-500 mb-2">
                 Secondary Feeds
               </h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">

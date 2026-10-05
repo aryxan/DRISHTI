@@ -22,34 +22,34 @@ export const EventTimeline: React.FC = () => {
   const getSeverityPill = (sev: IncidentSeverity) => {
     switch (sev) {
       case 'critical':
-        return 'text-rose-400 border-rose-800 bg-rose-950/70';
+        return 'text-red-800 border-red-200 bg-red-50';
       case 'high':
-        return 'text-amber-400 border-amber-800 bg-amber-950/70';
+        return 'text-orange-800 border-orange-200 bg-orange-50';
       case 'medium':
-        return 'text-yellow-400 border-yellow-800 bg-yellow-950/70';
+        return 'text-amber-800 border-amber-200 bg-amber-50';
       default:
-        return 'text-slate-400 border-slate-700 bg-slate-800/70';
+        return 'text-slate-700 border-slate-200 bg-slate-100';
     }
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#0a0f1d] border border-slate-800 rounded-xl overflow-hidden shadow-lg">
+    <div className="flex flex-col h-full bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs">
       {/* Header */}
-      <div className="px-4 py-3 bg-[#0d1424] border-b border-slate-800 flex items-center justify-between">
+      <div className="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Clock className="w-4 h-4 text-cyan-400" />
-          <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider font-mono">
+          <Clock className="w-4 h-4 text-slate-700" />
+          <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider font-mono">
             Event Stream Timeline
           </h3>
         </div>
-        <div className="flex items-center gap-1.5 text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/70">
-          <Radio className="w-3 h-3 animate-pulse" />
+        <div className="flex items-center gap-1.5 text-xs font-mono text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-300 font-semibold shadow-2xs">
+          <Radio className="w-3 h-3 text-emerald-600 animate-pulse" />
           <span>REAL-TIME</span>
         </div>
       </div>
 
       {/* Events List */}
-      <div className="p-3 flex-1 overflow-y-auto space-y-2.5">
+      <div className="p-3 flex-1 overflow-y-auto space-y-2.5 bg-slate-50/50">
         {events.map((evt, idx) => {
           const timeFormatted = new Date(evt.timestamp).toLocaleTimeString('en-US', {
             hour: '2-digit',
@@ -65,25 +65,25 @@ export const EventTimeline: React.FC = () => {
                 const targetCam = cameras.find((c) => c.camera_id === evt.camera_id);
                 if (targetCam) setSelectedCamera(targetCam);
               }}
-              className="p-2.5 bg-slate-900/70 hover:bg-slate-800/80 border border-slate-800/80 rounded-lg transition-colors cursor-pointer flex flex-col gap-1.5"
+              className="p-3 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg transition-colors cursor-pointer flex flex-col gap-1.5 shadow-2xs"
             >
               <div className="flex items-center justify-between text-xs font-mono">
                 <div className="flex items-center gap-1.5">
                   {getEventIcon(evt.event_type)}
-                  <span className="font-semibold text-slate-200 capitalize">
+                  <span className="font-bold text-slate-900 capitalize">
                     {evt.event_type.replace('_', ' ')}
                   </span>
                 </div>
-                <span className={`px-1.5 py-0.2 rounded text-[10px] uppercase border font-semibold ${getSeverityPill(evt.severity)}`}>
+                <span className={`px-1.5 py-0.5 rounded text-[10px] uppercase border font-semibold ${getSeverityPill(evt.severity)}`}>
                   {evt.severity}
                 </span>
               </div>
 
-              <p className="text-[11px] text-slate-300 leading-tight">
+              <p className="text-[11px] text-slate-600 leading-snug">
                 {evt.description}
               </p>
 
-              <div className="flex items-center justify-between text-[10px] text-slate-500 font-mono pt-1 border-t border-slate-800/50">
+              <div className="flex items-center justify-between text-[10px] text-slate-500 font-mono pt-1.5 border-t border-slate-100">
                 <span className="truncate max-w-[150px]">{evt.camera_name}</span>
                 <span>{timeFormatted}</span>
               </div>

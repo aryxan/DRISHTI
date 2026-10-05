@@ -18,16 +18,16 @@ export const SystemStatus: React.FC<SystemStatusProps> = ({ onOpenHealthModal })
       {/* Overall Health Status Indicator */}
       <button
         onClick={onOpenHealthModal}
-        className={`flex items-center gap-2 px-2.5 py-1 rounded-lg border text-xs font-medium transition-all ${
+        className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-medium transition-all ${
           isAllGood
-            ? 'bg-emerald-950/40 border-emerald-800/60 text-emerald-300 hover:bg-emerald-900/50'
-            : 'bg-amber-950/40 border-amber-800/60 text-amber-300 hover:bg-amber-900/50'
+            ? 'bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-100 shadow-2xs'
+            : 'bg-amber-50 border-amber-300 text-amber-800 hover:bg-amber-100 shadow-2xs'
         }`}
         title="View System Health Telemetry"
       >
         <span
           className={`w-2 h-2 rounded-full ${
-            isAllGood ? 'bg-emerald-400' : 'bg-amber-400 animate-ping'
+            isAllGood ? 'bg-emerald-600' : 'bg-amber-600 animate-ping'
           }`}
         />
         <Activity className="w-3.5 h-3.5" />
@@ -35,16 +35,16 @@ export const SystemStatus: React.FC<SystemStatusProps> = ({ onOpenHealthModal })
       </button>
 
       {/* Online Cameras Ticker */}
-      <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs font-mono text-slate-300">
-        <Camera className="w-3.5 h-3.5 text-cyan-400" />
-        <span className="text-slate-100 font-semibold">{onlineCameras}/{totalCameras}</span>
+      <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-lg text-xs font-mono text-slate-700">
+        <Camera className="w-3.5 h-3.5 text-slate-600" />
+        <span className="text-slate-900 font-bold">{onlineCameras}/{totalCameras}</span>
         <span className="text-slate-500 text-[11px]">STREAMS</span>
       </div>
 
       {/* Active Tracks Ticker */}
-      <div className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs font-mono text-slate-300">
-        <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />
-        <span className="text-slate-100 font-semibold">{threatSummary.active_tracks}</span>
+      <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-lg text-xs font-mono text-slate-700">
+        <ShieldAlert className="w-3.5 h-3.5 text-amber-600" />
+        <span className="text-slate-900 font-bold">{threatSummary.active_tracks}</span>
         <span className="text-slate-500 text-[11px]">TARGETS TRACKED</span>
       </div>
     </div>

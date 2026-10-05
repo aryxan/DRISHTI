@@ -12,18 +12,18 @@ export const AlertToast: React.FC = () => {
     switch (sev) {
       case 'critical':
         return {
-          bg: 'bg-rose-950/95 border-rose-600 text-rose-100 shadow-rose-950/80',
-          icon: <Flame className="w-5 h-5 text-rose-400 animate-bounce" />,
+          bg: 'bg-white border-red-300 text-slate-900 shadow-xl shadow-red-500/10',
+          icon: <Flame className="w-5 h-5 text-red-600 animate-bounce" />,
         };
       case 'high':
         return {
-          bg: 'bg-amber-950/95 border-amber-600 text-amber-100 shadow-amber-950/80',
-          icon: <ShieldAlert className="w-5 h-5 text-amber-400" />,
+          bg: 'bg-white border-amber-300 text-slate-900 shadow-xl shadow-amber-500/10',
+          icon: <ShieldAlert className="w-5 h-5 text-amber-600" />,
         };
       default:
         return {
-          bg: 'bg-slate-900/95 border-cyan-600 text-slate-100 shadow-cyan-950/80',
-          icon: <AlertCircle className="w-5 h-5 text-cyan-400" />,
+          bg: 'bg-white border-slate-300 text-slate-900 shadow-xl',
+          icon: <AlertCircle className="w-5 h-5 text-slate-700" />,
         };
     }
   };
@@ -35,25 +35,25 @@ export const AlertToast: React.FC = () => {
         return (
           <div
             key={toast.id}
-            className={`pointer-events-auto flex items-start gap-3 p-3.5 rounded-xl border shadow-2xl backdrop-blur-md transition-all duration-300 animate-in slide-in-from-bottom-5 ${style.bg}`}
+            className={`pointer-events-auto flex items-start gap-3 p-3.5 rounded-xl border shadow-xl transition-all duration-300 animate-in slide-in-from-bottom-5 ${style.bg}`}
           >
             <div className="shrink-0 mt-0.5">{style.icon}</div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between gap-2">
-                <h5 className="text-xs font-bold font-mono tracking-wide">
+                <h5 className="text-xs font-bold font-mono tracking-wide text-slate-900">
                   {toast.title}
                 </h5>
-                <span className="text-[10px] opacity-70 font-mono">
+                <span className="text-[10px] text-slate-400 font-mono">
                   {toast.timestamp}
                 </span>
               </div>
-              <p className="text-xs mt-1 opacity-90 leading-snug break-words">
+              <p className="text-xs mt-1 text-slate-600 leading-snug break-words">
                 {toast.message}
               </p>
             </div>
             <button
               onClick={() => dismissToast(toast.id)}
-              className="text-slate-400 hover:text-white p-1 rounded transition-colors"
+              className="text-slate-400 hover:text-slate-700 hover:bg-slate-100 p-1 rounded-md transition-colors cursor-pointer"
             >
               <X className="w-3.5 h-3.5" />
             </button>
