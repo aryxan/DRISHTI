@@ -1,0 +1,22 @@
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+.npm
+
+# Secrets and environment files (Strictly enforced by DRISHTI security guidelines)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.secrets
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

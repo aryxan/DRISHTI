@@ -1,0 +1,57 @@
+[
+  {
+    "event_id": "evt-10427",
+    "incident_id": "inc-10427",
+    "camera_id": "cam-01-perimeter-north",
+    "camera_name": "CAM-01 Perimeter Fence North",
+    "location_name": "Sector 4 North Boundary",
+    "event_type": "intrusion",
+    "timestamp": "2026-10-05T22:38:12Z",
+    "severity": "critical",
+    "description": "Intrusion detected: Person detected traversing polygon zone Alpha-4 at high speed."
+  },
+  {
+    "event_id": "evt-10426",
+    "incident_id": "inc-10426",
+    "camera_id": "cam-03-server-room",
+    "camera_name": "CAM-03 Data Center Tier 3 Vault",
+    "location_name": "Building B - Sublevel 2",
+    "event_type": "loitering",
+    "timestamp": "2026-10-05T22:35:10Z",
+    "severity": "high",
+    "description": "Loitering alert: Single tracked target stationary in vault entryway for >180s."
+  },
+  {
+    "event_id": "evt-10425",
+    "incident_id": "inc-10425",
+    "camera_id": "cam-02-main-gate",
+    "camera_name": "CAM-02 Main Entry Gate & Checkpoint",
+    "location_name": "Main Access Control Point A",
+    "event_type": "crowd_density",
+    "timestamp": "2026-10-05T22:20:00Z",
+    "severity": "medium",
+    "description": "Crowd density threshold exceeded: 24 persons counted in turnstile corridor."
+  },
+  {
+    "event_id": "evt-10424",
+    "incident_id": "inc-10424",
+    "camera_id": "cam-04-cargo-bay",
+    "camera_name": "CAM-04 Logistics Loading Dock",
+    "location_name": "South Logistics Yard",
+    "event_type": "unauthorized_parking",
+    "timestamp": "2026-10-05T22:05:40Z",
+    "severity": "medium",
+    "description": "Vehicle track stationary in transit lane for >300s without permit."
+  },
+  {
+    "event_id": "evt-10423",
+    "incident_id": "inc-10423",
+    "camera_id": "cam-05-rooftop-helipad",
+    "camera_name": "CAM-05 Helipad Sky Surveillance",
+    "location_name": "Building A - Tower Roof",
+    "event_type": "line_crossing",
+    "timestamp": "2026-10-05T21:45:00Z",
+    "severity": "low",
+    "description": "Virtual boundary line crossing detected: directional vector South-to-North."
+  }
+]

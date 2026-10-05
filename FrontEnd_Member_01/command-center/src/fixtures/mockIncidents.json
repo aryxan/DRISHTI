@@ -1,0 +1,93 @@
+[
+  {
+    "incident_id": "inc-10427",
+    "event_id": "evt-10427",
+    "title": "Perimeter Breach & Fence Scaling Detected",
+    "severity": "critical",
+    "threat_score": 92,
+    "confidence": 0.96,
+    "camera_id": "cam-01-perimeter-north",
+    "location_name": "Sector 4 North Boundary",
+    "timestamp_start": "2026-10-05T22:38:12Z",
+    "timestamp_end": null,
+    "status": "open",
+    "reason_codes": [
+      "RESTRICTED_ZONE_INTRUSION",
+      "RAPID_POLYGON_CROSSING",
+      "OFF_HOURS_ACTIVITY"
+    ],
+    "evidence_uri": "/evidence/clips/clip_inc_10427_20261005_223812.mp4"
+  },
+  {
+    "incident_id": "inc-10426",
+    "event_id": "evt-10425",
+    "title": "Extended Loitering in Tier 3 Vault Vestibule",
+    "severity": "high",
+    "threat_score": 78,
+    "confidence": 0.89,
+    "camera_id": "cam-03-server-room",
+    "location_name": "Building B - Sublevel 2",
+    "timestamp_start": "2026-10-05T22:35:10Z",
+    "timestamp_end": null,
+    "status": "investigating",
+    "reason_codes": [
+      "DWELL_TIME_EXCEEDED_180S",
+      "SINGLE_ACTOR_ANOMALY",
+      "ACCESS_BADGE_MISMATCH"
+    ],
+    "evidence_uri": "/evidence/clips/clip_inc_10426_20261005_223510.mp4"
+  },
+  {
+    "incident_id": "inc-10425",
+    "event_id": "evt-10422",
+    "title": "High Crowd Density Surge at Main Turnstiles",
+    "severity": "medium",
+    "threat_score": 64,
+    "confidence": 0.92,
+    "camera_id": "cam-02-main-gate",
+    "location_name": "Main Access Control Point A",
+    "timestamp_start": "2026-10-05T22:20:00Z",
+    "timestamp_end": null,
+    "status": "acknowledged",
+    "reason_codes": [
+      "CROWD_THRESHOLD_EXCEEDED",
+      "FLOW_RATE_BOTTLENECK"
+    ],
+    "evidence_uri": "/evidence/clips/clip_inc_10425_20261005_222000.mp4"
+  },
+  {
+    "incident_id": "inc-10424",
+    "event_id": "evt-10419",
+    "title": "Unidentified Vehicle Idle in Cargo Transit Lane",
+    "severity": "medium",
+    "threat_score": 52,
+    "confidence": 0.84,
+    "camera_id": "cam-04-cargo-bay",
+    "location_name": "South Logistics Yard",
+    "timestamp_start": "2026-10-05T22:05:40Z",
+    "timestamp_end": "2026-10-05T22:28:15Z",
+    "status": "resolved",
+    "reason_codes": [
+      "NO_PARKING_ZONE_STATIONARY",
+      "PLATE_NOT_PRE_REGISTERED"
+    ],
+    "evidence_uri": "/evidence/clips/clip_inc_10424_20261005_220540.mp4"
+  },
+  {
+    "incident_id": "inc-10423",
+    "event_id": "evt-10411",
+    "title": "Line Crossing on Maintenance Catwalk",
+    "severity": "low",
+    "threat_score": 34,
+    "confidence": 0.78,
+    "camera_id": "cam-05-rooftop-helipad",
+    "location_name": "Building A - Tower Roof",
+    "timestamp_start": "2026-10-05T21:45:00Z",
+    "timestamp_end": "2026-10-05T21:55:00Z",
+    "status": "resolved",
+    "reason_codes": [
+      "CATWALK_DIRECTION_REVERSED"
+    ],
+    "evidence_uri": "/evidence/clips/clip_inc_10423_20261005_214500.mp4"
+  }
+]
