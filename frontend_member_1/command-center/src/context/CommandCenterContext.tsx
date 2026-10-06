@@ -69,7 +69,8 @@ export const CommandCenterProvider: React.FC<{ children: React.ReactNode }> = ({
       id: `toast-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       timestamp: new Date().toLocaleTimeString(),
     };
-    setToasts((prev) => [newAlert, ...prev.slice(0, 4)]);
+    // Keep maximum 3 alert notifications at a time, removing the oldest
+    setToasts((prev) => [newAlert, ...prev].slice(0, 3));
   }, []);
 
   const dismissToast = useCallback((id: string) => {

@@ -1,184 +1,313 @@
 import React, { useState } from 'react';
-import { TopBar } from './TopBar';
-import { ThreatSummary } from './ThreatSummary';
 import { CameraGrid } from './CameraGrid';
 import { MapPanel } from './MapPanel';
+import { IncidentTable } from './IncidentTable';
 import { IncidentPanel } from './IncidentPanel';
+import { ThreatSummary } from './ThreatSummary';
 import { EventTimeline } from './EventTimeline';
 import { AlertToast } from './AlertToast';
 import { SystemHealth } from './SystemHealth';
 import { EvidenceModal } from './EvidenceModal';
 import { LoginModal } from './LoginModal';
+import { CurrentTime } from './CurrentTime';
 import { useAuth } from '../context/AuthContext';
 import {
   Activity,
-  Compass,
-  Grid,
-  LayoutDashboard,
-  ShieldAlert,
-  Clock,
+  FileText,
   LogIn,
+  LogOut,
+  MapPin,
+  Radio,
+  Radar,
+  Settings,
+  ShieldAlert,
+  SlidersHorizontal,
+  Video,
 } from 'lucide-react';
 
-export type DashboardView = 'all' | 'cameras' | 'map' | 'incidents' | 'timeline';
+export type DashboardView =
+  | 'all'
+  | 'cameras'
+  | 'map'
+  | 'incidents'
+  | 'threat'
+  | 'status'
+  | 'management'
+  | 'reports'
+  | 'settings';
 
 export const AppShell: React.FC = () => {
-  const { isAuthenticated } = useAuth();
-  const [activeView, setActiveView] = useState<DashboardView>('all');
+  const { isAuthenticated, user, logout } = useAuth();
+  const [activeView, setActiveView] = useState<DashboardView>('cameras');
   const [isHealthModalOpen, setIsHealthModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [evidencePreview, setEvidencePreview] = useState<{ uri: string; title: string } | null>(
     null
   );
 
+  const navItems = [
+    { id: 'cameras', label: 'Live Cameras', icon: Video },
+    { id: 'map', label: 'Map View', icon: MapPin },
+    { id: 'incidents', label: 'Active Incidents', icon: ShieldAlert },
+    { id: 'threat', label: 'Threat Overview', icon: Radar },
+    { id: 'status', label: 'System Status', icon: Activity },
+    { id: 'management', label: 'Camera Management', icon: SlidersHorizontal },
+    { id: 'reports', label: 'Reports', icon: FileText },
+    { id: 'settings', label: 'Settings', icon: Settings },
+  ] as const;
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-slate-200 selection:text-slate-900">
-      {/* Top Bar with SystemStatus, CurrentTime, and UserMenu */}
-      <TopBar onOpenHealthModal={() => setIsHealthModalOpen(true)} />
+    <div className="min-h-screen bg-slate-100 text-slate-800 flex flex-row font-sans selection:bg-slate-300 selection:text-slate-900">
+      {/* 1. Left Navigation Sidebar: White & Grey Theme */}
+      <aside className="w-60 xl:w-64 bg-slate-200/90 border-r border-slate-300 flex flex-col justify-between p-4 shrink-0 select-none min-h-screen text-slate-700">
+        <div className="flex flex-col gap-5">
+          {/* Top Logo & Title */}
+          <div className="flex items-center gap-2.5 px-1 py-1">
+            <div className="p-1.5 rounded-lg bg-white border border-slate-300 text-slate-800 shadow-xs flex items-center justify-center font-bold">
+              <Radio className="w-5 h-5 text-slate-700" />
+            </div>
+            <div>
+              <h1 className="text-sm font-bold tracking-wider text-slate-900 font-sans uppercase">
+                DRISHTI
+              </h1>
+              <p className="text-[11px] text-slate-500 font-sans font-medium">
+                Command Center
+              </p>
+            </div>
+          </div>
 
-      {/* Secondary Tactical Navigation Bar */}
-      <nav className="bg-white border-b border-slate-200 px-4 md:px-6 py-2.5 flex items-center justify-between gap-3 overflow-x-auto select-none shadow-2xs">
-        <div className="flex items-center gap-2 text-xs font-mono">
-          <button
-            onClick={() => setActiveView('all')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-              activeView === 'all'
-                ? 'bg-slate-900 border-slate-900 text-white font-semibold shadow-xs'
-                : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-            }`}
-          >
-            <LayoutDashboard className="w-3.5 h-3.5" />
-            <span>COMMAND WALL</span>
-          </button>
-
-          <button
-            onClick={() => setActiveView('cameras')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-              activeView === 'cameras'
-                ? 'bg-slate-900 border-slate-900 text-white font-semibold shadow-xs'
-                : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-            }`}
-          >
-            <Grid className="w-3.5 h-3.5" />
-            <span>CAMERA MATRIX</span>
-          </button>
-
-          <button
-            onClick={() => setActiveView('map')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-              activeView === 'map'
-                ? 'bg-slate-900 border-slate-900 text-white font-semibold shadow-xs'
-                : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-            }`}
-          >
-            <Compass className="w-3.5 h-3.5" />
-            <span>TACTICAL MAP</span>
-          </button>
-
-          <button
-            onClick={() => setActiveView('incidents')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-              activeView === 'incidents'
-                ? 'bg-slate-900 border-slate-900 text-white font-semibold shadow-xs'
-                : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-            }`}
-          >
-            <ShieldAlert className="w-3.5 h-3.5 text-rose-500" />
-            <span>INCIDENT QUEUE</span>
-          </button>
-
-          <button
-            onClick={() => setActiveView('timeline')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-              activeView === 'timeline'
-                ? 'bg-slate-900 border-slate-900 text-white font-semibold shadow-xs'
-                : 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-            }`}
-          >
-            <Clock className="w-3.5 h-3.5 text-amber-500" />
-            <span>EVENT TIMELINE</span>
-          </button>
+          {/* Sidebar Menu Items */}
+          <nav className="flex flex-col gap-1.5">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive =
+                activeView === item.id || (item.id === 'cameras' && activeView === 'all');
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveView(item.id)}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+                    isActive
+                      ? 'bg-white text-slate-900 font-bold shadow-xs border border-slate-300/80'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-300/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="truncate">{item.label}</span>
+                </button>
+              );
+            })}
+          </nav>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Sidebar Footer: Auth / Diagnostic Trigger */}
+        <div className="pt-3 border-t border-slate-300 flex flex-col gap-2">
           {!isAuthenticated ? (
             <button
               onClick={() => setIsLoginModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs font-semibold shadow-xs cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 text-xs font-semibold transition-colors cursor-pointer shadow-xs"
             >
               <LogIn className="w-3.5 h-3.5" />
-              Sign In
+              Sign In Operator
             </button>
           ) : (
+            <div className="flex items-center justify-between px-2.5 py-1.5 bg-white rounded-lg text-xs text-slate-700 border border-slate-300 shadow-2xs">
+              <div className="flex flex-col min-w-0">
+                <span className="font-semibold truncate text-slate-900">{user?.username}</span>
+                <span className="text-[10px] text-slate-500 uppercase font-mono">{user?.role}</span>
+              </div>
+              <button
+                onClick={logout}
+                title="Logout"
+                className="p-1 hover:text-slate-900 transition-colors cursor-pointer"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
+
+          <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 px-1">
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-600 animate-pulse" />
+              SYSTEM ONLINE
+            </span>
+            <span>v1.0.4</span>
+          </div>
+        </div>
+      </aside>
+
+      {/* 2. Main Stage */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        {/* Top Header Bar: Clean White & Grey Theme */}
+        <header className="px-5 py-3 bg-white/95 border-b border-slate-300 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-20 backdrop-blur-xs shadow-2xs">
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-slate-700 animate-pulse" />
+            <div>
+              <div className="text-xs font-mono font-bold text-slate-800">
+                10. Frontend Portal 1 – Command Center (frontend/command-center)
+              </div>
+              <div className="text-[11px] text-slate-500 font-medium">
+                Real-time Monitoring & Operational Dashboard
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <CurrentTime />
             <button
               onClick={() => setIsHealthModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-slate-700 hover:text-slate-900 border border-slate-200 rounded-lg bg-slate-100 hover:bg-slate-200 transition-colors shadow-2xs cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-md transition-colors cursor-pointer shadow-2xs"
             >
               <Activity className="w-3.5 h-3.5 text-slate-600" />
-              Diagnostics
+              <span>Diagnostics</span>
             </button>
-          )}
-        </div>
-      </nav>
+          </div>
+        </header>
 
-      {/* Main Dashboard Stage */}
-      <main className="flex-1 p-4 md:p-6 flex flex-col gap-5 overflow-y-auto">
-        {/* Threat Summary Banner */}
-        <ThreatSummary />
+        {/* Dynamic View Routing */}
+        <main className="p-4 md:p-6 flex-1 flex flex-col gap-4">
+          {/* Main Dashboard Layout (Live Cameras Overview matching reference screenshot) */}
+          {(activeView === 'cameras' || activeView === 'all') && (
+            <div className="flex flex-col gap-4 w-full">
+              {/* Top Row: 2x2 Cameras + Tactical Map */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+                {/* Left 7 Cols: 2x2 Camera Monitors */}
+                <div className="lg:col-span-7 xl:col-span-7 min-h-[340px] md:min-h-[380px] flex">
+                  <CameraGrid is2x2Mode={true} />
+                </div>
 
-        {/* View Routing */}
-        {activeView === 'all' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 flex-1 items-start">
-            {/* Left 8 Cols: Camera Matrix + Map */}
-            <div className="lg:col-span-8 flex flex-col gap-5">
-              <div className="min-h-[480px]">
-                <CameraGrid />
+                {/* Right 5 Cols: Interactive Tactical Map */}
+                <div className="lg:col-span-5 xl:col-span-5 min-h-[340px] md:min-h-[380px] flex">
+                  <MapPanel isCompactMap={true} />
+                </div>
               </div>
-              <div className="h-[420px]">
-                <MapPanel />
-              </div>
-            </div>
 
-            {/* Right 4 Cols: Incidents Queue + Event Timeline */}
-            <div className="lg:col-span-4 flex flex-col gap-5">
-              <div className="h-[480px]">
-                <IncidentPanel
-                  onViewEvidence={(uri, title) => setEvidencePreview({ uri, title })}
+              {/* Bottom Row: Active Incidents (Live) Table */}
+              <div className="w-full">
+                <IncidentTable
+                  onSelectIncident={(inc) => {
+                    if (inc.evidence_uri) {
+                      setEvidencePreview({ uri: inc.evidence_uri, title: inc.title });
+                    }
+                  }}
                 />
               </div>
-              <div className="h-[420px]">
-                <EventTimeline />
+            </div>
+          )}
+
+          {/* Full Map View */}
+          {activeView === 'map' && (
+            <div className="h-[calc(100vh-120px)] min-h-[600px] w-full">
+              <MapPanel isCompactMap={false} />
+            </div>
+          )}
+
+          {/* Full Incident Queue View */}
+          {activeView === 'incidents' && (
+            <div className="h-[calc(100vh-120px)] min-h-[600px] max-w-5xl mx-auto w-full">
+              <IncidentPanel
+                onViewEvidence={(uri, title) => setEvidencePreview({ uri, title })}
+              />
+            </div>
+          )}
+
+          {/* Threat Overview View */}
+          {activeView === 'threat' && (
+            <div className="max-w-4xl mx-auto w-full flex flex-col gap-5 py-4">
+              <h2 className="text-base font-bold text-white font-mono uppercase tracking-wider flex items-center gap-2">
+                <Radar className="w-5 h-5 text-blue-500" />
+                DEFCON Threat Telemetry & Posture
+              </h2>
+              <ThreatSummary />
+              <div className="mt-4">
+                <IncidentTable
+                  onSelectIncident={(inc) => {
+                    if (inc.evidence_uri) {
+                      setEvidencePreview({ uri: inc.evidence_uri, title: inc.title });
+                    }
+                  }}
+                />
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {activeView === 'cameras' && (
-          <div className="h-[calc(100vh-210px)] min-h-[600px]">
-            <CameraGrid />
-          </div>
-        )}
+          {/* System Status View */}
+          {activeView === 'status' && (
+            <div className="max-w-4xl mx-auto w-full flex flex-col gap-5 py-4">
+              <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl">
+                <h3 className="text-sm font-bold font-mono text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <Activity className="w-4 h-4 text-emerald-400" />
+                  Live Operational Telemetry
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="p-3 bg-slate-800/80 rounded-lg border border-slate-700">
+                    <div className="text-[10px] font-mono text-slate-400">STATUS</div>
+                    <div className="text-lg font-black text-emerald-400 font-mono mt-1">HEALTHY</div>
+                  </div>
+                  <div className="p-3 bg-slate-800/80 rounded-lg border border-slate-700">
+                    <div className="text-[10px] font-mono text-slate-400">LATENCY</div>
+                    <div className="text-lg font-black text-white font-mono mt-1">24 ms</div>
+                  </div>
+                  <div className="p-3 bg-slate-800/80 rounded-lg border border-slate-700">
+                    <div className="text-[10px] font-mono text-slate-400">GLOBAL FPS</div>
+                    <div className="text-lg font-black text-white font-mono mt-1">29.4</div>
+                  </div>
+                  <div className="p-3 bg-slate-800/80 rounded-lg border border-slate-700">
+                    <div className="text-[10px] font-mono text-slate-400">GPU LOAD</div>
+                    <div className="text-lg font-black text-blue-400 font-mono mt-1">42%</div>
+                  </div>
+                </div>
+              </div>
+              <EventTimeline />
+            </div>
+          )}
 
-        {activeView === 'map' && (
-          <div className="h-[calc(100vh-210px)] min-h-[600px]">
-            <MapPanel />
-          </div>
-        )}
+          {/* Camera Management View */}
+          {activeView === 'management' && (
+            <div className="h-[calc(100vh-120px)] min-h-[600px] w-full">
+              <CameraGrid is2x2Mode={false} />
+            </div>
+          )}
 
-        {activeView === 'incidents' && (
-          <div className="h-[calc(100vh-210px)] min-h-[600px] max-w-4xl mx-auto w-full">
-            <IncidentPanel
-              onViewEvidence={(uri, title) => setEvidencePreview({ uri, title })}
-            />
-          </div>
-        )}
+          {/* Reports View */}
+          {activeView === 'reports' && (
+            <div className="max-w-4xl mx-auto w-full py-4 flex flex-col gap-4">
+              <h2 className="text-base font-bold text-white font-mono uppercase tracking-wider flex items-center gap-2">
+                <FileText className="w-5 h-5 text-amber-500" />
+                Operational Incident Reports
+              </h2>
+              <IncidentTable />
+            </div>
+          )}
 
-        {activeView === 'timeline' && (
-          <div className="h-[calc(100vh-210px)] min-h-[600px] max-w-3xl mx-auto w-full">
-            <EventTimeline />
-          </div>
-        )}
-      </main>
+          {/* Settings View */}
+          {activeView === 'settings' && (
+            <div className="max-w-2xl mx-auto w-full p-6 bg-slate-900 border border-slate-800 rounded-xl my-4">
+              <h3 className="text-base font-bold text-white mb-4 flex items-center gap-2">
+                <Settings className="w-5 h-5 text-slate-400" />
+                Command Center Settings
+              </h3>
+              <p className="text-xs text-slate-400 mb-6">
+                Configure local CCTV stream pipelines, WebSocket heartbeat intervals, and operator notification thresholds.
+              </p>
+              <div className="space-y-4 text-xs font-mono">
+                <div className="flex items-center justify-between p-3 bg-slate-800/60 rounded-lg border border-slate-700">
+                  <span>Stream Refresh Interval</span>
+                  <span className="text-blue-400">30 FPS (Low Latency)</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-slate-800/60 rounded-lg border border-slate-700">
+                  <span>WebSocket Gateway</span>
+                  <span className="text-emerald-400">ws://localhost:8000/ws</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-slate-800/60 rounded-lg border border-slate-700">
+                  <span>Sound Alerts on DEFCON-1</span>
+                  <span className="text-emerald-400">Enabled</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </main>
+      </div>
 
       {/* Floating Alert Toasts for Real-Time Warnings */}
       <AlertToast />

@@ -1,5 +1,5 @@
 export type IncidentSeverity = 'low' | 'medium' | 'high' | 'critical';
-export type IncidentStatus = 'open' | 'acknowledged' | 'investigating' | 'resolved';
+export type IncidentStatus = 'open' | 'acknowledged' | 'investigating' | 'resolved' | 'review';
 
 export interface IncidentCardData {
   incident_id: string;

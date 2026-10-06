@@ -1,41 +1,57 @@
 [
   {
-    "incident_id": "inc-10427",
-    "event_id": "evt-10427",
-    "title": "Perimeter Breach & Fence Scaling Detected",
+    "incident_id": "inc-1042",
+    "event_id": "EVT-1042",
+    "title": "Zone Intrusion",
     "severity": "critical",
-    "threat_score": 92,
-    "confidence": 0.96,
-    "camera_id": "cam-01-perimeter-north",
-    "location_name": "Sector 4 North Boundary",
-    "timestamp_start": "2026-10-05T22:38:12Z",
+    "threat_score": 76,
+    "confidence": 0.94,
+    "camera_id": "CAM-07",
+    "location_name": "Perimeter Restricted Boundary Zone 4",
+    "timestamp_start": "2026-10-06T02:13:00Z",
     "timestamp_end": null,
     "status": "open",
     "reason_codes": [
-      "RESTRICTED_ZONE_INTRUSION",
-      "RAPID_POLYGON_CROSSING",
-      "OFF_HOURS_ACTIVITY"
+      "ZONE_INTRUSION",
+      "PERIMETER_CROSSING"
     ],
-    "evidence_uri": "/evidence/clips/clip_inc_10427_20261005_223812.mp4"
+    "evidence_uri": "/evidence/clips/clip_inc_1042_20261006_021300.mp4"
   },
   {
-    "incident_id": "inc-10426",
-    "event_id": "evt-10425",
-    "title": "Extended Loitering in Tier 3 Vault Vestibule",
+    "incident_id": "inc-1041",
+    "event_id": "EVT-1041",
+    "title": "Suspicious Vehicle",
+    "severity": "medium",
+    "threat_score": 58,
+    "confidence": 0.88,
+    "camera_id": "CAM-03",
+    "location_name": "Tier 3 Access Vault Ramp",
+    "timestamp_start": "2026-10-06T01:52:00Z",
+    "timestamp_end": null,
+    "status": "review",
+    "reason_codes": [
+      "SUSPICIOUS_VEHICLE",
+      "UNAUTHORIZED_DWELL"
+    ],
+    "evidence_uri": "/evidence/clips/clip_inc_1041_20261006_015200.mp4"
+  },
+  {
+    "incident_id": "inc-1040",
+    "event_id": "EVT-1040",
+    "title": "Crowd Anomaly",
     "severity": "high",
-    "threat_score": 78,
-    "confidence": 0.89,
-    "camera_id": "cam-03-server-room",
-    "location_name": "Building B - Sublevel 2",
-    "timestamp_start": "2026-10-05T22:35:10Z",
+    "threat_score": 62,
+    "confidence": 0.91,
+    "camera_id": "CAM-05",
+    "location_name": "North Gate Pedestrian Plaza",
+    "timestamp_start": "2026-10-06T01:30:00Z",
     "timestamp_end": null,
     "status": "investigating",
     "reason_codes": [
-      "DWELL_TIME_EXCEEDED_180S",
-      "SINGLE_ACTOR_ANOMALY",
-      "ACCESS_BADGE_MISMATCH"
+      "CROWD_ANOMALY",
+      "SURGE_DETECTION"
     ],
-    "evidence_uri": "/evidence/clips/clip_inc_10426_20261005_223510.mp4"
+    "evidence_uri": "/evidence/clips/clip_inc_1040_20261006_013000.mp4"
   },
   {
     "incident_id": "inc-10425",

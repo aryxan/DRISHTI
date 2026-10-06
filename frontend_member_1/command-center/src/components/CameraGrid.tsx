@@ -4,10 +4,58 @@ import { CameraCard } from './CameraCard';
 import type { CameraCardData } from '../types/camera';
 import { Minimize2, Video } from 'lucide-react';
 
-export const CameraGrid: React.FC = () => {
+interface CameraGridProps {
+  is2x2Mode?: boolean;
+}
+
+export const CameraGrid: React.FC<CameraGridProps> = ({ is2x2Mode = false }) => {
   const { cameras, selectedCamera, setSelectedCamera } = useCommandCenter();
   const [filter, setFilter] = useState<'all' | 'online' | 'attention'>('all');
   const [spotlightCamera, setSpotlightCamera] = useState<CameraCardData | null>(null);
+
+  if (is2x2Mode) {
+    const top4 = cameras.slice(0, 4);
+    return (
+      <div className="grid grid-cols-2 gap-2.5 w-full h-full">
+        {top4.map((cam) => {
+          const isSelected = selectedCamera?.camera_id === cam.camera_id;
+          return (
+            <div
+              key={cam.camera_id}
+              onClick={() => setSelectedCamera(cam)}
+              className={`relative aspect-video rounded-lg overflow-hidden bg-slate-950 border transition-all cursor-pointer group shadow-xs ${
+                isSelected
+                  ? 'border-slate-900 ring-2 ring-slate-900/30'
+                  : 'border-slate-300 hover:border-slate-400'
+              }`}
+            >
+              <img
+                src={cam.thumbnail_url}
+                alt={cam.camera_name}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src =
+                    'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=800&q=80';
+                }}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+
+              {/* Exact reference overlay: CAM-01 Live */}
+              <div className="absolute bottom-2 left-2.5 flex items-center gap-2 z-10 select-none">
+                <span className="text-xs font-mono font-bold text-white tracking-wide drop-shadow-sm">
+                  {cam.camera_id}
+                </span>
+                <span className="flex items-center gap-1.5 text-[11px] font-mono text-zinc-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                  Live
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   const filteredCameras = cameras.filter((cam) => {
     if (filter === 'online') return cam.stream_status === 'online';

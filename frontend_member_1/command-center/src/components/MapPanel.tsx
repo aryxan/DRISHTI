@@ -6,11 +6,16 @@ import {
   Camera,
   Compass,
   Layers,
+  MapPin,
   Navigation,
   ShieldAlert,
 } from 'lucide-react';
 
-export const MapPanel: React.FC = () => {
+interface MapPanelProps {
+  isCompactMap?: boolean;
+}
+
+export const MapPanel: React.FC<MapPanelProps> = ({ isCompactMap = false }) => {
   const { cameras, incidents, selectedCamera, setSelectedCamera, setSelectedIncident } =
     useCommandCenter();
 
@@ -25,13 +30,101 @@ export const MapPanel: React.FC = () => {
 
   // Map coordinates relative positions normalized to percentage grid
   const cameraCoordinates: Record<string, { x: number; y: number }> = {
-    'cam-01-perimeter-north': { x: 35, y: 18 },
-    'cam-02-main-gate': { x: 75, y: 72 },
-    'cam-03-server-room': { x: 52, y: 48 },
-    'cam-04-cargo-bay': { x: 22, y: 68 },
-    'cam-05-rooftop-helipad': { x: 68, y: 28 },
-    'cam-06-substation-west': { x: 15, y: 40 },
+    'CAM-01': { x: 38, y: 38 },
+    'CAM-02': { x: 82, y: 32 },
+    'CAM-03': { x: 55, y: 68 },
+    'CAM-04': { x: 85, y: 72 },
+    'cam-01-perimeter-north': { x: 38, y: 38 },
+    'cam-02-main-gate': { x: 82, y: 32 },
+    'cam-03-server-room': { x: 55, y: 68 },
+    'cam-04-cargo-bay': { x: 85, y: 72 },
+    'cam-05-rooftop-helipad': { x: 22, y: 22 },
+    'cam-06-substation-west': { x: 18, y: 65 },
   };
+
+  const compactPins = [
+    { id: 'CAM-01', label: 'CAM-01', color: 'bg-slate-800 text-white', x: 38, y: 38 },
+    { id: 'CAM-02', label: 'CAM-02', color: 'bg-slate-700 text-white', x: 82, y: 32 },
+    { id: 'CAM-03', label: 'CAM-03', color: 'bg-slate-800 text-white', x: 55, y: 68 },
+    { id: 'CAM-04', label: 'CAM-04', color: 'bg-slate-900 text-white', x: 85, y: 72 },
+  ];
+
+  if (isCompactMap) {
+    return (
+      <div className="relative w-full h-full bg-[#F8FAFC] rounded-lg overflow-hidden border border-slate-300 shadow-xs select-none">
+        {/* Architectural Monochrome Street Map Vector */}
+        <svg
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          viewBox="0 0 500 400"
+          preserveAspectRatio="none"
+        >
+          {/* Base map land */}
+          <rect width="500" height="400" fill="#FAFAFA" />
+
+          {/* Park zones */}
+          <rect x="20" y="30" width="110" height="90" rx="8" fill="#F0F0F2" />
+          <rect x="180" y="240" width="90" height="120" rx="6" fill="#F0F0F2" />
+          <rect x="340" y="40" width="130" height="80" rx="8" fill="#F0F0F2" />
+          <rect x="30" y="280" width="80" height="80" rx="6" fill="#F0F0F2" />
+
+          {/* Water canal / river */}
+          <path
+            d="M 380,0 Q 360,120 400,200 T 420,400 L 460,400 Q 440,240 430,120 T 450,0 Z"
+            fill="#E2E8F0"
+            opacity="0.9"
+          />
+
+          {/* City blocks & architectural footprint */}
+          <rect x="160" y="50" width="70" height="60" fill="#EAEAEA" />
+          <rect x="250" y="70" width="60" height="50" fill="#EAEAEA" />
+          <rect x="150" y="140" width="80" height="70" fill="#EAEAEA" />
+          <rect x="250" y="150" width="70" height="60" fill="#EAEAEA" />
+          <rect x="300" y="250" width="80" height="90" fill="#EAEAEA" />
+
+          {/* Streets */}
+          <line x1="0" y1="90" x2="500" y2="90" stroke="#FFFFFF" strokeWidth="6" />
+          <line x1="0" y1="180" x2="500" y2="180" stroke="#FFFFFF" strokeWidth="8" />
+          <line x1="0" y1="270" x2="500" y2="270" stroke="#FFFFFF" strokeWidth="7" />
+          <line x1="140" y1="0" x2="140" y2="400" stroke="#FFFFFF" strokeWidth="7" />
+          <line x1="240" y1="0" x2="240" y2="400" stroke="#FFFFFF" strokeWidth="8" />
+          <line x1="330" y1="0" x2="330" y2="400" stroke="#FFFFFF" strokeWidth="7" />
+
+          {/* Major Diagonal Boulevard */}
+          <line x1="0" y1="360" x2="480" y2="20" stroke="#E4E4E7" strokeWidth="10" />
+          <line x1="0" y1="360" x2="480" y2="20" stroke="#FFFFFF" strokeWidth="6" />
+        </svg>
+
+        {/* Monochrome Map Markers */}
+        {compactPins.map((pin) => {
+          const matchedCam = cameras.find((c) => c.camera_id === pin.id);
+          const isSelected = selectedCamera?.camera_id === pin.id;
+          return (
+            <div
+              key={pin.id}
+              onClick={() => matchedCam && setSelectedCamera(matchedCam)}
+              className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 group transition-transform hover:scale-110"
+              style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
+            >
+              <div className="flex flex-col items-center">
+                {/* Teardrop Pin */}
+                <div
+                  className={`w-7 h-7 rounded-full flex items-center justify-center shadow-md border-2 border-white transition-all ${
+                    pin.color
+                  } ${isSelected ? 'ring-2 ring-white scale-110' : ''}`}
+                >
+                  <MapPin className="w-4 h-4 fill-current" />
+                </div>
+                {/* Label Box */}
+                <div className="mt-1 px-1.5 py-0.5 bg-white border border-zinc-400 rounded shadow-xs text-[10px] font-mono font-bold text-black">
+                  {pin.label}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   const zones = [
     { name: 'ZONE ALPHA (NORTH PERIMETER)', x: 18, y: 10, w: 42, h: 22, color: 'border-red-400/50 bg-red-500/5' },

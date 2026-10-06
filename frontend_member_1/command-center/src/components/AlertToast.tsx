@@ -6,23 +6,25 @@ import type { IncidentSeverity } from '../types/incident';
 export const AlertToast: React.FC = () => {
   const { toasts, dismissToast } = useCommandCenter();
 
-  if (toasts.length === 0) return null;
+  // Enforce strictly no more than 3 alert notifications simultaneously
+  const visibleToasts = toasts.slice(0, 3);
+  if (visibleToasts.length === 0) return null;
 
   const getToastStyle = (sev: IncidentSeverity) => {
     switch (sev) {
       case 'critical':
         return {
-          bg: 'bg-white border-red-300 text-slate-900 shadow-xl shadow-red-500/10',
-          icon: <Flame className="w-5 h-5 text-red-600 animate-bounce" />,
+          bg: 'bg-white border-red-300 text-slate-900 shadow-lg',
+          icon: <Flame className="w-5 h-5 text-red-600 animate-pulse" />,
         };
       case 'high':
         return {
-          bg: 'bg-white border-amber-300 text-slate-900 shadow-xl shadow-amber-500/10',
+          bg: 'bg-white border-amber-300 text-slate-900 shadow-lg',
           icon: <ShieldAlert className="w-5 h-5 text-amber-600" />,
         };
       default:
         return {
-          bg: 'bg-white border-slate-300 text-slate-900 shadow-xl',
+          bg: 'bg-white border-slate-300 text-slate-900 shadow-lg',
           icon: <AlertCircle className="w-5 h-5 text-slate-700" />,
         };
     }
@@ -30,7 +32,7 @@ export const AlertToast: React.FC = () => {
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none">
-      {toasts.map((toast) => {
+      {visibleToasts.map((toast) => {
         const style = getToastStyle(toast.severity);
         return (
           <div
