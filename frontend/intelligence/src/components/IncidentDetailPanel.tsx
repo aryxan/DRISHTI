@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Shield, Sparkles, Target, Globe, Clock, MapPin, Video } from 'lucide-react';
+import { Shield, Sparkles, Clock, MapPin, Video } from 'lucide-react';
 import { useIntelligence } from '../context/IntelligenceContext';
 import { StatusControls } from './StatusControls';
+import { SidebarNav, NavTab } from './SidebarNav';
 import { AISummaryCard } from './AISummaryCard';
 import { ThreatScoreExplanation } from './ThreatScoreExplanation';
 import { ReasonCodeChips } from './ReasonCodeChips';
@@ -13,7 +14,7 @@ import { StaleAnalysisBanner, LoadingSkeleton, ErrorBanner } from './StateIndica
 
 export const IncidentDetailPanel: React.FC = () => {
   const { selectedIncident, isLoading, error, isDetailLoading } = useIntelligence();
-  const [activeTab, setActiveTab] = useState<'overview' | 'spatial' | 'osint' | 'timeline'>('overview');
+  const [activeTab, setActiveTab] = useState<NavTab>('overview');
 
   if (isLoading) return <LoadingSkeleton />;
 
@@ -110,84 +111,39 @@ export const IncidentDetailPanel: React.FC = () => {
       {/* 3. Stale AI Analysis Banner (if status updated or data stale) */}
       <StaleAnalysisBanner />
 
-      {/* 4. Tab Navigation Header */}
-      <div className="flex items-center gap-1 border-b border-slate-800 font-mono text-xs overflow-x-auto pb-1">
-        <button
-          onClick={() => setActiveTab('overview')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-t-lg border-b-2 font-semibold transition whitespace-nowrap ${
-            activeTab === 'overview'
-              ? 'border-cyan-400 text-cyan-300 bg-slate-900/90'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <Sparkles className="h-4 w-4 text-cyan-400" />
-          <span>AI SUMMARY & THREAT SCORES</span>
-        </button>
+      {/* 4. Main Tactical Layout with Sidebar Navigation */}
+      <div className="flex flex-col lg:flex-row items-start gap-4">
+        {/* Navigation Sidebar */}
+        <SidebarNav activeTab={activeTab} onSelectTab={setActiveTab} />
 
-        <button
-          onClick={() => setActiveTab('spatial')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-t-lg border-b-2 font-semibold transition whitespace-nowrap ${
-            activeTab === 'spatial'
-              ? 'border-cyan-400 text-cyan-300 bg-slate-900/90'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <Target className="h-4 w-4 text-cyan-400" />
-          <span>TRAJECTORY OVERLAY & FORENSICS</span>
-        </button>
+        {/* Selected Tab Content Area */}
+        <div className="flex-1 w-full space-y-4 min-w-0">
+          {isDetailLoading && (
+            <div className="flex items-center justify-center p-3 text-xs font-mono text-cyan-400 gap-2 bg-slate-950/60 rounded-lg border border-slate-800">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+              <span>Fetching deep AI reasoning telemetry for {selectedIncident.incident_id}...</span>
+            </div>
+          )}
 
-        <button
-          onClick={() => setActiveTab('osint')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-t-lg border-b-2 font-semibold transition whitespace-nowrap ${
-            activeTab === 'osint'
-              ? 'border-cyan-400 text-cyan-300 bg-slate-900/90'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <Globe className="h-4 w-4 text-emerald-400" />
-          <span>OSINT CONTEXT CARDS</span>
-        </button>
+          {activeTab === 'overview' && (
+            <>
+              <ReasonCodeChips />
+              <AISummaryCard />
+              <ThreatScoreExplanation />
+            </>
+          )}
 
-        <button
-          onClick={() => setActiveTab('timeline')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-t-lg border-b-2 font-semibold transition whitespace-nowrap ${
-            activeTab === 'timeline'
-              ? 'border-cyan-400 text-cyan-300 bg-slate-900/90'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <Clock className="h-4 w-4 text-amber-400" />
-          <span>AUDIT TIMELINE</span>
-        </button>
-      </div>
+          {activeTab === 'spatial' && (
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+              <TrackTrajectoryOverlay />
+              <EvidencePreview />
+            </div>
+          )}
 
-      {/* 5. Tab Content Views */}
-      <div className="space-y-4">
-        {isDetailLoading && (
-          <div className="flex items-center justify-center p-3 text-xs font-mono text-cyan-400 gap-2 bg-slate-950/60 rounded-lg border border-slate-800">
-            <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-            <span>Fetching deep AI reasoning telemetry for {selectedIncident.incident_id}...</span>
-          </div>
-        )}
+          {activeTab === 'osint' && <OSINTContextCards />}
 
-        {activeTab === 'overview' && (
-          <>
-            <ReasonCodeChips />
-            <AISummaryCard />
-            <ThreatScoreExplanation />
-          </>
-        )}
-
-        {activeTab === 'spatial' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <TrackTrajectoryOverlay />
-            <EvidencePreview />
-          </div>
-        )}
-
-        {activeTab === 'osint' && <OSINTContextCards />}
-
-        {activeTab === 'timeline' && <TimelineView />}
+          {activeTab === 'timeline' && <TimelineView />}
+        </div>
       </div>
     </div>
   );
