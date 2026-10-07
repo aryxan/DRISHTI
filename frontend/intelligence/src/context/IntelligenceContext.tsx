@@ -25,6 +25,8 @@ interface IntelligenceContextType {
   setFilter: (updater: Partial<IncidentFilterOptions>) => void;
   resetFilters: () => void;
   filteredIncidents: Incident[];
+  isFilterOpen: boolean;
+  toggleFilterOpen: () => void;
 
   isLoading: boolean;
   isDetailLoading: boolean;
@@ -70,6 +72,8 @@ export const IntelligenceProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [timelineByIncident, setTimelineByIncident] = useState<Record<string, TimelineEvent[]>>(mockTimelineEventsByIncident);
 
   const [filters, setFiltersState] = useState<IncidentFilterOptions>(defaultFilters);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const toggleFilterOpen = useCallback(() => setIsFilterOpen((prev) => !prev), []);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isDetailLoading, setIsDetailLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -377,6 +381,8 @@ export const IntelligenceProvider: React.FC<{ children: React.ReactNode }> = ({ 
         setFilter,
         resetFilters,
         filteredIncidents,
+        isFilterOpen,
+        toggleFilterOpen,
         isLoading,
         isDetailLoading,
         error,

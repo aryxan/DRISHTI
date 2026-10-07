@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { IntelligenceProvider } from './context/IntelligenceContext';
 import { SidebarNav, NavTab } from './components/SidebarNav';
 import { Header } from './components/Header';
-import { IncidentFilters } from './components/IncidentFilters';
 import { IncidentList } from './components/IncidentList';
 import { IncidentDetailPanel } from './components/IncidentDetailPanel';
 import { CitationsModal } from './components/CitationsModal';
@@ -17,14 +16,11 @@ export const AppContent: React.FC = () => {
 
       {/* 2. Main Operational Stage */}
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        {/* Top Header Bar */}
+        {/* Top Header Bar with Filter Button & Dropdown Tab */}
         <Header />
 
         {/* Main Content Area */}
         <main className="p-4 md:p-6 flex-1 flex flex-col gap-4">
-          {/* Incident Filter Bar */}
-          <IncidentFilters />
-
           {/* 2-Column Responsive Layout */}
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 items-start">
             {/* Left 4 Cols: Active Incidents Queue */}
