@@ -32,10 +32,10 @@ export const ReasonCodeChips: React.FC = () => {
   };
 
   return (
-    <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-3 flex flex-col gap-2">
+    <div className="bg-white border border-slate-300 rounded-xl p-3.5 flex flex-col gap-2 shadow-2xs">
       <div className="flex items-center gap-2">
-        <Tag className="h-3.5 w-3.5 text-cyan-400" />
-        <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider">
+        <Tag className="h-4 w-4 text-cyan-700" />
+        <span className="text-xs font-mono font-bold text-slate-900 uppercase tracking-wider">
           EXPLAINABLE REASON-CODE TAGS ({selectedIncident.reason_codes.length})
         </span>
       </div>
@@ -49,19 +49,19 @@ export const ReasonCodeChips: React.FC = () => {
             <div key={code} className="relative group">
               <button
                 onClick={() => handleChipClick(code)}
-                className={`px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold transition border ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition border cursor-pointer ${
                   isSelected
-                    ? 'bg-cyan-950 border-cyan-400 text-cyan-300 ring-1 ring-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.3)]'
-                    : 'bg-slate-950 border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white'
+                    ? 'bg-cyan-900 text-white border-cyan-700 shadow-xs'
+                    : 'bg-slate-900 border-slate-800 hover:border-cyan-600 text-cyan-400 hover:text-white'
                 }`}
               >
                 #{code}
               </button>
 
               {/* Hover Tooltip */}
-              <div className="absolute left-0 bottom-full mb-1 hidden group-hover:block z-30 bg-slate-950 border border-slate-800 rounded-lg p-2 shadow-xl min-w-[200px] text-[10px] text-slate-300 font-sans pointer-events-none">
+              <div className="absolute left-0 bottom-full mb-1.5 hidden group-hover:block z-30 bg-slate-900 border border-slate-700 text-white rounded-lg p-2.5 shadow-xl min-w-[220px] text-[11px] font-sans pointer-events-none">
                 <span className="font-mono text-cyan-400 font-bold block mb-0.5">#{code}</span>
-                <span>{description}</span>
+                <span className="text-slate-200">{description}</span>
               </div>
             </div>
           );

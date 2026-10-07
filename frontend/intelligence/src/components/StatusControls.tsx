@@ -11,20 +11,20 @@ export const StatusControls: React.FC = () => {
   const currentStatus = selectedIncident.status;
 
   const statusList: { status: IncidentStatus; label: string; icon: React.ReactNode; color: string }[] = [
-    { status: 'open', label: 'OPEN', icon: <ShieldAlert className="h-3.5 w-3.5" />, color: 'text-rose-400 border-rose-500/50 bg-rose-950/40 hover:bg-rose-900/60' },
-    { status: 'acknowledged', label: 'ACKNOWLEDGED', icon: <AlertCircle className="h-3.5 w-3.5" />, color: 'text-amber-400 border-amber-500/50 bg-amber-950/40 hover:bg-amber-900/60' },
-    { status: 'investigating', label: 'INVESTIGATING', icon: <Search className="h-3.5 w-3.5" />, color: 'text-cyan-400 border-cyan-500/50 bg-cyan-950/40 hover:bg-cyan-900/60' },
-    { status: 'review', label: 'REVIEW', icon: <FileCheck className="h-3.5 w-3.5" />, color: 'text-purple-400 border-purple-500/50 bg-purple-950/40 hover:bg-purple-900/60' },
-    { status: 'resolved', label: 'RESOLVED', icon: <CheckCircle2 className="h-3.5 w-3.5" />, color: 'text-emerald-400 border-emerald-500/50 bg-emerald-950/40 hover:bg-emerald-900/60' }
+    { status: 'open', label: 'OPEN', icon: <ShieldAlert className="h-3.5 w-3.5" />, color: 'text-rose-800 border-rose-300 bg-rose-50 hover:bg-rose-100' },
+    { status: 'acknowledged', label: 'ACKNOWLEDGED', icon: <AlertCircle className="h-3.5 w-3.5" />, color: 'text-amber-800 border-amber-300 bg-amber-50 hover:bg-amber-100' },
+    { status: 'investigating', label: 'INVESTIGATING', icon: <Search className="h-3.5 w-3.5" />, color: 'text-cyan-800 border-cyan-300 bg-cyan-50 hover:bg-cyan-100' },
+    { status: 'review', label: 'REVIEW', icon: <FileCheck className="h-3.5 w-3.5" />, color: 'text-purple-800 border-purple-300 bg-purple-50 hover:bg-purple-100' },
+    { status: 'resolved', label: 'RESOLVED', icon: <CheckCircle2 className="h-3.5 w-3.5" />, color: 'text-emerald-800 border-emerald-300 bg-emerald-50 hover:bg-emerald-100' }
   ];
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div className="bg-white border border-slate-300 rounded-xl p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-2xs">
       <div className="flex items-center gap-2">
-        <span className="text-xs font-mono font-bold text-slate-400 uppercase">
+        <span className="text-xs font-mono font-bold text-slate-500 uppercase">
           TRIAGE STATUS CONTROL:
         </span>
-        <span className="px-2 py-0.5 rounded text-xs font-mono font-bold uppercase bg-slate-800 text-cyan-400 border border-slate-700">
+        <span className="px-2 py-0.5 rounded text-xs font-mono font-bold uppercase bg-slate-100 text-slate-800 border border-slate-300">
           CURRENT: {currentStatus}
         </span>
       </div>
@@ -36,10 +36,10 @@ export const StatusControls: React.FC = () => {
             <button
               key={item.status}
               onClick={() => updateIncidentStatus(selectedIncident.incident_id, item.status)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition border ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition border cursor-pointer ${
                 isActive
-                  ? `${item.color} ring-1 ring-cyan-400 shadow-md`
-                  : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                  ? `${item.color} ring-1 ring-cyan-600 shadow-xs font-bold`
+                  : 'bg-slate-50 border-slate-300 text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               {item.icon}

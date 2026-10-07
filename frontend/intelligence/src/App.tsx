@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IntelligenceProvider } from './context/IntelligenceContext';
+import { SidebarNav, NavTab } from './components/SidebarNav';
 import { Header } from './components/Header';
 import { IncidentFilters } from './components/IncidentFilters';
 import { IncidentList } from './components/IncidentList';
@@ -7,29 +8,37 @@ import { IncidentDetailPanel } from './components/IncidentDetailPanel';
 import { CitationsModal } from './components/CitationsModal';
 
 export const AppContent: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<NavTab>('overview');
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
-      {/* Top Bar Header */}
-      <Header />
+    <div className="min-h-screen bg-slate-100 text-slate-800 flex flex-row font-sans selection:bg-slate-300 selection:text-slate-900">
+      {/* 1. Left Navigation Sidebar */}
+      <SidebarNav activeTab={activeTab} onSelectTab={setActiveTab} />
 
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 space-y-4">
-        {/* Incident Filter Toolbar */}
-        <IncidentFilters />
+      {/* 2. Main Operational Stage */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        {/* Top Header Bar */}
+        <Header />
 
-        {/* Tactical 2-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
-          {/* Left Column: Active Incidents Queue */}
-          <div className="lg:col-span-4 h-[calc(100vh-180px)] sticky top-20">
-            <IncidentList />
+        {/* Main Content Area */}
+        <main className="p-4 md:p-6 flex-1 flex flex-col gap-4">
+          {/* Incident Filter Bar */}
+          <IncidentFilters />
+
+          {/* 2-Column Responsive Layout */}
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 items-start">
+            {/* Left 4 Cols: Active Incidents Queue */}
+            <div className="xl:col-span-4 min-h-[500px]">
+              <IncidentList />
+            </div>
+
+            {/* Right 8 Cols: Detailed AI Intelligence Panel */}
+            <div className="xl:col-span-8 space-y-4 min-w-0">
+              <IncidentDetailPanel activeTab={activeTab} />
+            </div>
           </div>
-
-          {/* Right Column: Detailed AI Intelligence Panel */}
-          <div className="lg:col-span-8 space-y-4">
-            <IncidentDetailPanel />
-          </div>
-        </div>
-      </main>
+        </main>
+      </div>
 
       {/* Citations Inspector Modal */}
       <CitationsModal />
