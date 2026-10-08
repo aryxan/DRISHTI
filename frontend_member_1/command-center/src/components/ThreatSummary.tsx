@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCommandCenter } from '../context/CommandCenterContext';
-import { AlertOctagon, Flame, ShieldAlert, Users } from 'lucide-react';
+import { AlertOctagon } from 'lucide-react';
 
 export const ThreatSummary: React.FC = () => {
   const { threatSummary } = useCommandCenter();
@@ -78,62 +78,47 @@ export const ThreatSummary: React.FC = () => {
       </div>
 
       {/* Floating Card 3: Critical Alerts */}
-      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-3">
-        <div className="flex flex-col min-w-0">
-          <span className="text-[10px] font-mono tracking-wider uppercase text-red-600 font-semibold truncate">
-            CRITICAL ALERTS
+      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-1">
+        <span className="text-[10px] font-mono tracking-wider uppercase text-red-600 font-semibold truncate">
+          CRITICAL ALERTS
+        </span>
+        <div className="flex items-baseline gap-1.5 mt-1">
+          <span className="text-2xl font-black text-red-700 font-mono tracking-tight">
+            {threatSummary.critical_alerts_count}
           </span>
-          <div className="flex items-baseline gap-1.5 mt-1">
-            <span className="text-2xl font-black text-red-700 font-mono tracking-tight">
-              {threatSummary.critical_alerts_count}
-            </span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-red-50 text-red-700 border border-red-200 font-bold">
-              DEFCON
-            </span>
-          </div>
-        </div>
-        <div className="p-2 rounded-xl bg-red-50 border border-red-200 text-red-700 shrink-0 shadow-2xs">
-          <Flame className="w-4 h-4" />
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-red-50 text-red-700 border border-red-200 font-bold">
+            DEFCON
+          </span>
         </div>
       </div>
 
       {/* Floating Card 4: High Alerts */}
-      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-3">
-        <div className="flex flex-col min-w-0">
-          <span className="text-[10px] font-mono tracking-wider uppercase text-amber-600 font-semibold truncate">
-            HIGH ALERTS
+      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-1">
+        <span className="text-[10px] font-mono tracking-wider uppercase text-amber-600 font-semibold truncate">
+          HIGH ALERTS
+        </span>
+        <div className="flex items-baseline gap-1.5 mt-1">
+          <span className="text-2xl font-black text-amber-700 font-mono tracking-tight">
+            {threatSummary.high_alerts_count}
           </span>
-          <div className="flex items-baseline gap-1.5 mt-1">
-            <span className="text-2xl font-black text-amber-700 font-mono tracking-tight">
-              {threatSummary.high_alerts_count}
-            </span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 font-bold">
-              PRIORITY
-            </span>
-          </div>
-        </div>
-        <div className="p-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 shrink-0 shadow-2xs">
-          <ShieldAlert className="w-4 h-4" />
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 font-bold">
+            PRIORITY
+          </span>
         </div>
       </div>
 
       {/* Floating Card 5: Active Target Tracks */}
-      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-3">
-        <div className="flex flex-col min-w-0">
-          <span className="text-[10px] font-mono tracking-wider uppercase text-slate-500 font-semibold truncate">
-            ACTIVE TRACKS
+      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-1">
+        <span className="text-[10px] font-mono tracking-wider uppercase text-slate-500 font-semibold truncate">
+          ACTIVE TRACKS
+        </span>
+        <div className="flex items-baseline gap-1.5 mt-1">
+          <span className="text-2xl font-black text-slate-900 font-mono tracking-tight">
+            {threatSummary.active_tracks}
           </span>
-          <div className="flex items-baseline gap-1.5 mt-1">
-            <span className="text-2xl font-black text-slate-900 font-mono tracking-tight">
-              {threatSummary.active_tracks}
-            </span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-300 font-bold">
-              LIVE
-            </span>
-          </div>
-        </div>
-        <div className="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 shrink-0 shadow-2xs">
-          <Users className="w-4 h-4" />
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-300 font-bold">
+            LIVE
+          </span>
         </div>
       </div>
     </div>
