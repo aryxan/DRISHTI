@@ -223,38 +223,41 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* 4. Bottom Attribution & Security Badges (Compact, full-width) */}
-      <div className="w-full bg-slate-950 text-slate-400 py-3.5 px-4 md:px-6 text-center text-[10px] leading-relaxed">
-        <div className="w-full flex flex-col gap-1 max-w-5xl mx-auto">
-          <p className="text-slate-300 font-medium">
+      {/* 4. Bottom Attribution & Security Badges (Pure Black Theme) */}
+      <div className="w-full bg-black text-zinc-400 py-4 px-4 md:px-6 text-center text-[10px] leading-relaxed border-t border-zinc-800">
+        <div className="w-full flex flex-col gap-1.5 max-w-5xl mx-auto">
+          <p className="text-zinc-200 font-medium">
             Content Owned and Maintained by DRISHTI Tactical Defense & Surveillance Operations Grid
           </p>
-          <p className="text-slate-400">
+          <p className="text-zinc-400">
             Designed, Developed and Hosted by{' '}
-            <strong className="text-slate-200 underline decoration-slate-600 underline-offset-2">
+            <strong className="text-white underline decoration-zinc-600 underline-offset-2">
               National Informatics Centre (NIC)
             </strong>
             , Ministry of Electronics & Information Technology
           </p>
-          <div className="flex items-center justify-center gap-2 text-slate-500 font-mono text-[9px] mt-0.5">
-            <span>Last Updated: <strong className="text-slate-300">Oct 08, 2026</strong></span>
+          <div className="flex items-center justify-center gap-2 text-zinc-500 font-mono text-[9px] mt-0.5">
+            <span>Last Updated: <strong className="text-zinc-300">Oct 08, 2026</strong></span>
             <span>•</span>
             <span>Security Classification: <strong className="text-emerald-400">RESTRICTED // LEVEL-4</strong></span>
           </div>
         </div>
 
         {/* Scaled Accreditation Badges */}
-        <div className="mt-2.5 pt-2 border-t border-slate-900/80 flex items-center justify-center flex-wrap gap-4 text-[10px]">
-          <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-slate-300">
-            <span className="text-[9px] text-slate-500 font-mono">Framework:</span>
+        <div className="mt-3 pt-3 border-t border-zinc-800 flex items-center justify-center flex-wrap gap-4 text-[10px]">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-zinc-900 border border-zinc-800 rounded text-zinc-300 shadow-2xs">
+            <span className="text-[9px] text-zinc-500 font-mono">Framework:</span>
             <span className="font-bold text-white text-[10px]">S3WaaS</span>
           </div>
 
-          <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-slate-300">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-zinc-900 border border-zinc-800 rounded text-zinc-300 shadow-2xs">
+            <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-amber-500 via-white to-emerald-600 flex items-center justify-center text-[7px] font-bold text-black border border-zinc-700">
+              i
+            </div>
             <span className="font-bold text-white text-[10px]">Digital India</span>
           </div>
 
-          <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-emerald-400 font-mono">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-zinc-900 border border-zinc-800 rounded text-emerald-400 font-mono shadow-2xs">
             <CheckCircle2 className="w-3 h-3 text-emerald-400" />
             <span>ISO 27001 Security Compliant</span>
           </div>
