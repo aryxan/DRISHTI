@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCommandCenter } from '../context/CommandCenterContext';
-import { AlertOctagon, Flame, ShieldAlert, Users, Zap } from 'lucide-react';
+import { AlertOctagon, Flame, ShieldAlert, Users } from 'lucide-react';
 
 export const ThreatSummary: React.FC = () => {
   const { threatSummary } = useCommandCenter();
@@ -51,20 +51,15 @@ export const ThreatSummary: React.FC = () => {
 
       {/* Floating Card 2: Average Threat Score */}
       <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-2">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex flex-col min-w-0">
-            <span className="text-[10px] font-mono tracking-wider uppercase text-slate-500 font-semibold truncate">
-              AVG THREAT SCORE
+        <div className="flex flex-col min-w-0">
+          <span className="text-[10px] font-mono tracking-wider uppercase text-slate-500 font-semibold truncate">
+            AVG THREAT SCORE
+          </span>
+          <div className="flex items-baseline gap-1 mt-1">
+            <span className="text-2xl font-black text-slate-900 font-mono tracking-tight">
+              {threatSummary.average_threat_score}
             </span>
-            <div className="flex items-baseline gap-1 mt-1">
-              <span className="text-2xl font-black text-slate-900 font-mono tracking-tight">
-                {threatSummary.average_threat_score}
-              </span>
-              <span className="text-xs text-slate-400 font-mono font-medium">/100</span>
-            </div>
-          </div>
-          <div className="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 shrink-0 shadow-2xs">
-            <Zap className="w-4 h-4" />
+            <span className="text-xs text-slate-400 font-mono font-medium">/100</span>
           </div>
         </div>
         {/* Visual score bar */}
