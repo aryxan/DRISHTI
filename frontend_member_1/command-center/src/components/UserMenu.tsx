@@ -1,11 +1,36 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import type { UserRole } from '../types/auth';
-import { Shield, User, LogOut, Award, CheckCircle2 } from 'lucide-react';
+import { Shield, LogOut, Award, CheckCircle2 } from 'lucide-react';
 
 interface UserMenuProps {
   onOpenLogin?: () => void;
 }
+
+/**
+ * Exact circular user silhouette icon matching the reference design:
+ * Circle outline ring, solid round head, and solid curved shoulders/torso.
+ */
+export const ProfileAvatarIcon: React.FC<{ className?: string }> = ({
+  className = 'w-7 h-7 text-slate-900',
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    {/* Outer circle boundary ring */}
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.8" />
+    {/* Solid silhouette head */}
+    <circle cx="12" cy="8.3" r="3.1" fill="currentColor" />
+    {/* Solid silhouette shoulders / torso */}
+    <path
+      d="M5.8 19.3C6.7 15.6 9.1 13.6 12 13.6C14.9 13.6 17.3 15.6 18.2 19.3C16.5 20.9 14.4 21.8 12 21.8C9.6 21.8 7.5 20.9 5.8 19.3Z"
+      fill="currentColor"
+    />
+  </svg>
+);
 
 export const UserMenu: React.FC<UserMenuProps> = ({ onOpenLogin }) => {
   const { user, isAuthenticated, switchRole, logout } = useAuth();
@@ -67,9 +92,9 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onOpenLogin }) => {
             else setIsOpen(!isOpen);
           }}
           title="Operator Login"
-          className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-300 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors cursor-pointer shadow-2xs"
+          className="relative p-0.5 rounded-full text-slate-800 hover:text-black hover:scale-105 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-400/40"
         >
-          <User className="w-4 h-4" />
+          <ProfileAvatarIcon className="w-7 h-7 text-slate-800 hover:text-black transition-colors" />
         </button>
       </div>
     );
@@ -77,17 +102,13 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onOpenLogin }) => {
 
   return (
     <div className="relative" ref={menuRef}>
-      {/* Profile Icon Only (no name, no exit sign) */}
+      {/* Profile Icon matching user reference image */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         title="Operator Profile"
-        className="relative w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-300 flex items-center justify-center text-slate-700 transition-all cursor-pointer shadow-2xs hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/30"
+        className="relative p-0.5 rounded-full text-slate-800 hover:text-black hover:scale-105 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-400/40"
       >
-        <span className="font-mono text-xs font-bold text-slate-800">
-          {user.username?.charAt(0).toUpperCase() || 'O'}
-        </span>
-        {/* Active online status badge */}
-        <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white" />
+        <ProfileAvatarIcon className="w-7 h-7 text-slate-900 hover:text-black transition-colors" />
       </button>
 
       {/* Profile Dropdown Popover */}
@@ -95,11 +116,11 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onOpenLogin }) => {
         <div className="absolute right-0 mt-2 w-72 bg-white border border-slate-300 rounded-xl shadow-xl p-4 z-50 animate-in fade-in slide-in-from-top-1 text-slate-800">
           {/* Header with Avatar & Name */}
           <div className="flex items-center gap-3 pb-3 border-b border-slate-200">
-            <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-800 font-bold font-mono text-sm shadow-2xs">
-              <User className="w-5 h-5 text-slate-700" />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center text-slate-900 shrink-0">
+              <ProfileAvatarIcon className="w-9 h-9 text-slate-900" />
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="text-xs text-slate-400 font-mono uppercase tracking-wider font-semibold">
+              <span className="text-[10px] text-slate-400 font-mono uppercase tracking-wider font-semibold">
                 Operator Profile
               </span>
               <h3 className="text-sm font-bold text-slate-900 truncate">
