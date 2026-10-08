@@ -83,9 +83,9 @@ export const AppShell: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => setActiveView(item.id)}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all duration-200 cursor-pointer ${
                     isActive
-                      ? 'bg-white text-slate-900 font-bold shadow-xs border border-slate-300/80'
+                      ? 'bg-white text-slate-900 font-bold shadow-[0_4px_12px_rgba(0,0,0,0.06)] border border-slate-300/80 -translate-y-0.5'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-300/60'
                   }`}
                 >
@@ -112,7 +112,7 @@ export const AppShell: React.FC = () => {
       {/* 2. Main Stage */}
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* Top Header Bar: Clean White & Grey Theme */}
-        <header className="px-5 py-3 bg-white/95 border-b border-slate-300 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-20 backdrop-blur-xs shadow-2xs">
+        <header className="px-5 py-3.5 bg-white/95 border-b border-slate-200/90 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-20 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-slate-700 animate-pulse" />
             <div>
@@ -165,7 +165,7 @@ export const AppShell: React.FC = () => {
 
               {/* Tactical Side Bar: Threat Telemetry & KPI Panel */}
               <aside className="w-full xl:w-72 2xl:w-80 shrink-0 flex flex-col gap-3">
-                <div className="bg-white border border-slate-300 rounded-xl p-3.5 shadow-2xs">
+                <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06),0_4px_12px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.09),0_6px_16px_-3px_rgba(0,0,0,0.05)] transition-all duration-300">
                   <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-200">
                     <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-slate-800 font-mono">
                       <Radar className="w-4 h-4 text-slate-700" />
@@ -295,7 +295,7 @@ export const AppShell: React.FC = () => {
         </main>
 
         {/* Command Center Tactical Footer */}
-        <footer className="mt-auto bg-white/95 border-t border-slate-300 px-5 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 font-sans shadow-2xs">
+        <footer className="mt-auto bg-white/95 border-t border-slate-200/90 px-5 py-3 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 font-sans shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
           <div className="flex items-center gap-4 flex-wrap">
             <div className="flex items-center gap-2 font-mono text-[11px] font-semibold text-slate-800">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />

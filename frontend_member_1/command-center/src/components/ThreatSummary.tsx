@@ -35,7 +35,7 @@ export const ThreatSummary: React.FC = () => {
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-col gap-3 w-full">
       {/* Floating Card 1: System Threat Posture */}
-      <div className="bg-slate-100 border border-slate-200 rounded-xl p-3.5 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
+      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0">
           <span className="text-[10px] font-mono tracking-wider uppercase text-slate-500 font-semibold truncate">
             SYSTEM POSTURE
@@ -50,7 +50,7 @@ export const ThreatSummary: React.FC = () => {
       </div>
 
       {/* Floating Card 2: Average Threat Score */}
-      <div className="bg-slate-100 border border-slate-200 rounded-xl p-3.5 shadow-xs hover:shadow-sm transition-all flex flex-col gap-2">
+      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-2">
         <div className="flex items-center justify-between gap-3">
           <div className="flex flex-col min-w-0">
             <span className="text-[10px] font-mono tracking-wider uppercase text-slate-500 font-semibold truncate">
@@ -63,12 +63,12 @@ export const ThreatSummary: React.FC = () => {
               <span className="text-xs text-slate-400 font-mono font-medium">/100</span>
             </div>
           </div>
-          <div className="p-2 rounded-xl bg-slate-200/80 border border-slate-300/80 text-slate-700 shrink-0 shadow-2xs">
+          <div className="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 shrink-0 shadow-2xs">
             <Zap className="w-4 h-4" />
           </div>
         </div>
         {/* Visual score bar */}
-        <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+        <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
           <div
             className={`h-full transition-all duration-500 ${
               threatSummary.average_threat_score >= 75
@@ -83,7 +83,7 @@ export const ThreatSummary: React.FC = () => {
       </div>
 
       {/* Floating Card 3: Critical Alerts */}
-      <div className="bg-slate-100 border border-slate-200 rounded-xl p-3.5 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
+      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0">
           <span className="text-[10px] font-mono tracking-wider uppercase text-red-600 font-semibold truncate">
             CRITICAL ALERTS
@@ -103,7 +103,7 @@ export const ThreatSummary: React.FC = () => {
       </div>
 
       {/* Floating Card 4: High Alerts */}
-      <div className="bg-slate-100 border border-slate-200 rounded-xl p-3.5 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
+      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0">
           <span className="text-[10px] font-mono tracking-wider uppercase text-amber-600 font-semibold truncate">
             HIGH ALERTS
@@ -123,7 +123,7 @@ export const ThreatSummary: React.FC = () => {
       </div>
 
       {/* Floating Card 5: Active Target Tracks */}
-      <div className="bg-slate-100 border border-slate-200 rounded-xl p-3.5 shadow-xs hover:shadow-sm transition-all flex items-center justify-between gap-3">
+      <div className="bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0">
           <span className="text-[10px] font-mono tracking-wider uppercase text-slate-500 font-semibold truncate">
             ACTIVE TRACKS
@@ -132,12 +132,12 @@ export const ThreatSummary: React.FC = () => {
             <span className="text-2xl font-black text-slate-900 font-mono tracking-tight">
               {threatSummary.active_tracks}
             </span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 border border-slate-300 font-bold">
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-300 font-bold">
               LIVE
             </span>
           </div>
         </div>
-        <div className="p-2 rounded-xl bg-slate-200/80 border border-slate-300/80 text-slate-700 shrink-0 shadow-2xs">
+        <div className="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 shrink-0 shadow-2xs">
           <Users className="w-4 h-4" />
         </div>
       </div>

@@ -110,10 +110,10 @@ export const IncidentCard: React.FC<IncidentCardProps> = ({
   return (
     <div
       onClick={() => onSelect?.(incident)}
-      className={`p-3.5 bg-white rounded-xl border transition-all duration-200 cursor-pointer flex flex-col gap-2.5 shadow-xs ${
+      className={`p-4 bg-white rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col gap-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 ${
         isSelected
-          ? 'border-slate-900 ring-2 ring-slate-900/20 shadow-md'
-          : 'border-slate-200 hover:border-slate-300 hover:shadow-sm'
+          ? 'border-slate-900 ring-2 ring-slate-900/20 shadow-lg'
+          : 'border-slate-200/90 hover:border-slate-300 hover:bg-slate-50/50'
       }`}
     >
       {/* Header: ID, Severity, Status */}

@@ -61,7 +61,7 @@ export const IncidentTable: React.FC<IncidentTableProps> = ({ onSelectIncident }
   };
 
   return (
-    <div className="bg-white rounded-xl border border-slate-300 shadow-xs p-4 w-full text-slate-800">
+    <div className="bg-white rounded-2xl border border-slate-200/90 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06),0_4px_12px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.09),0_6px_16px_-3px_rgba(0,0,0,0.05)] transition-all duration-300 p-4 w-full text-slate-800">
       {/* Table Title matching reference screenshot */}
       <div className="flex items-center justify-between pb-3 mb-1 border-b border-slate-100">
         <h3 className="text-sm md:text-base font-bold text-slate-900 tracking-tight flex items-center gap-1.5 font-sans">

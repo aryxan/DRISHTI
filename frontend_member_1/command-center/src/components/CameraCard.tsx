@@ -52,10 +52,10 @@ export const CameraCard: React.FC<CameraCardProps> = ({
   return (
     <div
       onClick={() => onSelect?.(camera)}
-      className={`group relative bg-slate-100 border rounded-xl overflow-hidden transition-all duration-200 cursor-pointer flex flex-col shadow-xs ${
+      className={`group relative bg-white border rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer flex flex-col shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.12)] hover:-translate-y-1 ${
         isSelected
-          ? 'border-slate-900 ring-2 ring-slate-900/25 shadow-md bg-slate-200/80'
-          : 'border-slate-200/90 hover:border-slate-300 hover:bg-slate-100/80 hover:shadow-sm'
+          ? 'border-slate-900 ring-2 ring-slate-900/25 shadow-lg bg-slate-50'
+          : 'border-slate-200/90 hover:border-slate-300 hover:bg-slate-50/50'
       }`}
     >
       {/* Video Viewport Area */}

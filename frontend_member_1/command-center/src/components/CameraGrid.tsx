@@ -23,7 +23,7 @@ export const CameraGrid: React.FC<CameraGridProps> = ({ is2x2Mode = false }) => 
             <div
               key={cam.camera_id}
               onClick={() => setSelectedCamera(cam)}
-              className={`relative aspect-video rounded-lg overflow-hidden bg-slate-950 border transition-all cursor-pointer group shadow-xs ${
+              className={`relative aspect-video rounded-xl overflow-hidden bg-slate-950 border transition-all duration-300 cursor-pointer group shadow-[0_6px_20px_rgba(0,0,0,0.12)] hover:shadow-[0_14px_30px_rgba(0,0,0,0.22)] hover:-translate-y-1 ${
                 isSelected
                   ? 'border-slate-900 ring-2 ring-slate-900/30'
                   : 'border-slate-300 hover:border-slate-400'
@@ -64,7 +64,7 @@ export const CameraGrid: React.FC<CameraGridProps> = ({ is2x2Mode = false }) => 
   });
 
   return (
-    <div className="flex flex-col h-full bg-slate-100/60 border border-slate-200 rounded-xl overflow-hidden shadow-xs">
+    <div className="flex flex-col h-full bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06),0_4px_12px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.09),0_6px_16px_-3px_rgba(0,0,0,0.05)] transition-all duration-300">
       {/* Header bar for Camera Wall */}
       <div className="px-4 py-3 bg-slate-200/50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">

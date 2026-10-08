@@ -51,7 +51,7 @@ export const MapPanel: React.FC<MapPanelProps> = ({ isCompactMap = false }) => {
 
   if (isCompactMap) {
     return (
-      <div className="relative w-full h-full bg-[#F8FAFC] rounded-lg overflow-hidden border border-slate-300 shadow-xs select-none">
+      <div className="relative w-full h-full bg-[#F8FAFC] rounded-2xl overflow-hidden border border-slate-200/90 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06),0_4px_12px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.09),0_6px_16px_-3px_rgba(0,0,0,0.05)] transition-all duration-300 select-none">
         {/* Architectural Monochrome Street Map Vector */}
         <svg
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
@@ -134,7 +134,7 @@ export const MapPanel: React.FC<MapPanelProps> = ({ isCompactMap = false }) => {
   ];
 
   return (
-    <div className="flex flex-col h-full bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs relative">
+    <div className="flex flex-col h-full bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06),0_4px_12px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.09),0_6px_16px_-3px_rgba(0,0,0,0.05)] transition-all duration-300 relative">
       {/* Header bar */}
       <div className="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between z-10">
         <div className="flex items-center gap-2">
