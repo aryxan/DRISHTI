@@ -9,13 +9,11 @@ import { AlertToast } from './AlertToast';
 import { SystemHealth } from './SystemHealth';
 import { EvidenceModal } from './EvidenceModal';
 import { LoginModal } from './LoginModal';
+import { UserMenu } from './UserMenu';
 import { CurrentTime } from './CurrentTime';
-import { useAuth } from '../context/AuthContext';
 import {
   Activity,
   FileText,
-  LogIn,
-  LogOut,
   MapPin,
   Radio,
   Radar,
@@ -37,7 +35,6 @@ export type DashboardView =
   | 'settings';
 
 export const AppShell: React.FC = () => {
-  const { isAuthenticated, user, logout } = useAuth();
   const [activeView, setActiveView] = useState<DashboardView>('cameras');
   const [isHealthModalOpen, setIsHealthModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -130,70 +127,57 @@ export const AppShell: React.FC = () => {
 
           <div className="flex items-center gap-3">
             <CurrentTime />
-            {!isAuthenticated ? (
-              <button
-                onClick={() => setIsLoginModalOpen(true)}
-                className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-800 hover:text-slate-950 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-lg transition-colors cursor-pointer shadow-2xs"
-              >
-                <LogIn className="w-3.5 h-3.5 text-slate-600" />
-                <span className="font-semibold">Operator Login</span>
-              </button>
-            ) : (
-              <div className="flex items-center gap-2.5 px-2.5 py-1 bg-slate-100 rounded-lg border border-slate-300 shadow-2xs">
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-slate-200 border border-slate-300 flex items-center justify-center text-[10px] font-bold text-slate-700 font-mono">
-                    {user?.username?.charAt(0).toUpperCase() || 'O'}
-                  </div>
-                  <div className="flex flex-col text-left">
-                    <span className="text-xs font-semibold text-slate-900 leading-tight">
-                      {user?.username}
-                    </span>
-                    <span className="text-[9px] text-slate-500 uppercase font-mono font-medium leading-none">
-                      {user?.role}
-                    </span>
-                  </div>
-                </div>
-                <div className="h-4 w-px bg-slate-300 mx-0.5" />
-                <button
-                  onClick={logout}
-                  title="Sign Out"
-                  className="p-1 text-slate-500 hover:text-red-600 transition-colors cursor-pointer rounded"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            )}
+            <UserMenu onOpenLogin={() => setIsLoginModalOpen(true)} />
           </div>
         </header>
 
         {/* Dynamic View Routing */}
         <main className="p-4 md:p-6 flex-1 flex flex-col gap-4">
-          {/* Main Dashboard Layout (Live Cameras Overview matching reference screenshot) */}
+          {/* Main Dashboard Layout (Live Cameras Overview + Tactical Side Bar) */}
           {(activeView === 'cameras' || activeView === 'all') && (
-            <div className="flex flex-col gap-4 w-full">
-              {/* Top Row: 2x2 Cameras + Tactical Map */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-                {/* Left 7 Cols: 2x2 Camera Monitors */}
-                <div className="lg:col-span-7 xl:col-span-7 min-h-[340px] md:min-h-[380px] flex">
-                  <CameraGrid is2x2Mode={true} />
+            <div className="flex flex-col xl:flex-row gap-4 w-full items-start">
+              {/* Primary Content: 2x2 Cameras + Tactical Map + Incidents Table */}
+              <div className="flex-1 flex flex-col gap-4 w-full min-w-0">
+                {/* Top Row: 2x2 Cameras + Tactical Map */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+                  {/* Left 7 Cols: 2x2 Camera Monitors */}
+                  <div className="lg:col-span-7 xl:col-span-7 min-h-[340px] md:min-h-[380px] flex">
+                    <CameraGrid is2x2Mode={true} />
+                  </div>
+
+                  {/* Right 5 Cols: Interactive Tactical Map */}
+                  <div className="lg:col-span-5 xl:col-span-5 min-h-[340px] md:min-h-[380px] flex">
+                    <MapPanel isCompactMap={true} />
+                  </div>
                 </div>
 
-                {/* Right 5 Cols: Interactive Tactical Map */}
-                <div className="lg:col-span-5 xl:col-span-5 min-h-[340px] md:min-h-[380px] flex">
-                  <MapPanel isCompactMap={true} />
+                {/* Bottom Row: Active Incidents (Live) Table */}
+                <div className="w-full">
+                  <IncidentTable
+                    onSelectIncident={(inc) => {
+                      if (inc.evidence_uri) {
+                        setEvidencePreview({ uri: inc.evidence_uri, title: inc.title });
+                      }
+                    }}
+                  />
                 </div>
               </div>
 
-              {/* Bottom Row: Active Incidents (Live) Table */}
-              <div className="w-full">
-                <IncidentTable
-                  onSelectIncident={(inc) => {
-                    if (inc.evidence_uri) {
-                      setEvidencePreview({ uri: inc.evidence_uri, title: inc.title });
-                    }
-                  }}
-                />
-              </div>
+              {/* Tactical Side Bar: Threat Telemetry & KPI Panel */}
+              <aside className="w-full xl:w-72 2xl:w-80 shrink-0 flex flex-col gap-3">
+                <div className="bg-white border border-slate-300 rounded-xl p-3.5 shadow-2xs">
+                  <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-200">
+                    <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-slate-800 font-mono">
+                      <Radar className="w-4 h-4 text-slate-700" />
+                      <span>Threat Telemetry</span>
+                    </div>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 border border-slate-300 text-slate-700 font-bold">
+                      LIVE
+                    </span>
+                  </div>
+                  <ThreatSummary />
+                </div>
+              </aside>
             </div>
           )}
 
@@ -309,6 +293,34 @@ export const AppShell: React.FC = () => {
             </div>
           )}
         </main>
+
+        {/* Command Center Tactical Footer */}
+        <footer className="mt-auto bg-white/95 border-t border-slate-300 px-5 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 font-sans shadow-2xs">
+          <div className="flex items-center gap-4 flex-wrap">
+            <div className="flex items-center gap-2 font-mono text-[11px] font-semibold text-slate-800">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>DEFENSE GRID: OPERATIONAL</span>
+            </div>
+            <span className="text-slate-300 hidden sm:inline">|</span>
+            <div className="text-[11px] font-mono text-slate-500">
+              SECURITY: <span className="font-semibold text-slate-700">RESTRICTED // LEVEL-4</span>
+            </div>
+            <span className="text-slate-300 hidden md:inline">|</span>
+            <div className="text-[11px] font-mono text-slate-500 hidden md:flex items-center gap-3">
+              <span>LATENCY: <strong className="text-slate-800 font-mono">24ms</strong></span>
+              <span>GLOBAL FPS: <strong className="text-slate-800 font-mono">29.4</strong></span>
+              <span>UPTIME: <strong className="text-emerald-600 font-mono">99.98%</strong></span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 text-[11px] font-mono text-slate-500">
+            <span>DRISHTI Command Center</span>
+            <span className="text-slate-300">•</span>
+            <span>v1.0.4</span>
+            <span className="text-slate-300">•</span>
+            <span className="text-slate-600 font-medium">UTC+05:30</span>
+          </div>
+        </footer>
       </div>
 
       {/* Floating Alert Toasts for Real-Time Warnings */}
