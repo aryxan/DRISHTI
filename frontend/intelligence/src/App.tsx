@@ -20,18 +20,13 @@ export const AppContent: React.FC = () => {
         <Header />
 
         {/* Main Content Area */}
-        <main className="p-4 md:p-6 flex-1 flex flex-col">
-          {/* 2-Column Responsive Layout — both columns stretch to same height */}
-          <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 items-stretch flex-1">
-            {/* Left 4 Cols: Active Incidents Queue — stretches full height */}
-            <div className="xl:col-span-4 flex flex-col">
-              <IncidentList />
-            </div>
+        <main className="p-4 md:p-6 flex-1 flex flex-col gap-4">
+          {/* Active Incidents Queue Trigger Button & Dropdown Tab */}
+          <IncidentList />
 
-            {/* Right 8 Cols: Detailed AI Intelligence Panel */}
-            <div className="xl:col-span-8 flex flex-col gap-4 min-w-0">
-              <IncidentDetailPanel activeTab={activeTab} />
-            </div>
+          {/* Full-Width Detailed AI Intelligence Panel */}
+          <div className="flex-1 w-full min-w-0">
+            <IncidentDetailPanel activeTab={activeTab} />
           </div>
         </main>
       </div>

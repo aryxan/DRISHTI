@@ -124,11 +124,17 @@ export const IncidentDetailPanel: React.FC<IncidentDetailPanelProps> = ({ active
         )}
 
         {activeTab === 'overview' && (
-          <>
+          <div className="flex flex-col gap-4">
             <ReasonCodeChips />
-            <AISummaryCard />
-            <ThreatScoreExplanation />
-          </>
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 items-start">
+              <div className="xl:col-span-7">
+                <AISummaryCard />
+              </div>
+              <div className="xl:col-span-5">
+                <ThreatScoreExplanation />
+              </div>
+            </div>
+          </div>
         )}
 
         {activeTab === 'reasons' && <ReasonCodeChips />}

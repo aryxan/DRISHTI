@@ -41,9 +41,9 @@ export const OSINTContextCards: React.FC = () => {
       )}
 
       {/* OSINT Context Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
         {cards.length === 0 ? (
-          <div className="md:col-span-2 text-center py-6 text-slate-500 font-mono text-xs">
+          <div className="col-span-full text-center py-6 text-slate-500 font-mono text-xs">
             No OSINT context cards correlated for this incident.
           </div>
         ) : (
