@@ -55,10 +55,12 @@ export const AppShell: React.FC = () => {
   ] as const;
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-800 flex flex-row font-sans selection:bg-slate-300 selection:text-slate-900">
-      {/* 1. Left Navigation Sidebar: White & Grey Theme */}
-      <aside className="w-60 xl:w-64 bg-slate-200/90 border-r border-slate-300 flex flex-col justify-between p-4 shrink-0 select-none min-h-screen text-slate-700">
-        <div className="flex flex-col gap-5">
+    <div className="min-h-screen bg-slate-100 text-slate-800 flex flex-col font-sans selection:bg-slate-300 selection:text-slate-900">
+      {/* 1. Main Application Row: Sidebar + Main Content */}
+      <div className="flex-1 flex flex-row min-w-0">
+        {/* Left Navigation Sidebar: White & Grey Theme */}
+        <aside className="w-60 xl:w-64 bg-slate-200/90 border-r border-slate-300 flex flex-col justify-between p-4 shrink-0 select-none text-slate-700">
+          <div className="flex flex-col gap-5">
           {/* Top Logo & Title */}
           <div className="flex items-center gap-2.5 px-1 py-1">
             <div className="p-1.5 rounded-lg bg-white border border-slate-300 text-slate-800 shadow-xs flex items-center justify-center font-bold">
@@ -134,51 +136,32 @@ export const AppShell: React.FC = () => {
 
         {/* Dynamic View Routing */}
         <main className="p-4 md:p-6 flex-1 flex flex-col gap-4">
-          {/* Main Dashboard Layout (Live Cameras Overview + Tactical Side Bar) */}
+          {/* Main Dashboard Layout (Live Cameras Overview matching reference screenshot) */}
           {(activeView === 'cameras' || activeView === 'all') && (
-            <div className="flex flex-col xl:flex-row gap-4 w-full items-start">
-              {/* Primary Content: 2x2 Cameras + Tactical Map + Incidents Table */}
-              <div className="flex-1 flex flex-col gap-4 w-full min-w-0">
-                {/* Top Row: 2x2 Cameras + Tactical Map */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-                  {/* Left 7 Cols: 2x2 Camera Monitors */}
-                  <div className="lg:col-span-7 xl:col-span-7 min-h-[340px] md:min-h-[380px] flex">
-                    <CameraGrid is2x2Mode={true} />
-                  </div>
-
-                  {/* Right 5 Cols: Interactive Tactical Map */}
-                  <div className="lg:col-span-5 xl:col-span-5 min-h-[340px] md:min-h-[380px] flex">
-                    <MapPanel isCompactMap={true} />
-                  </div>
+            <div className="flex flex-col gap-4 w-full">
+              {/* Top Row: 2x2 Cameras + Tactical Map */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+                {/* Left 7 Cols: 2x2 Camera Monitors */}
+                <div className="lg:col-span-7 xl:col-span-7 min-h-[340px] md:min-h-[380px] flex">
+                  <CameraGrid is2x2Mode={true} />
                 </div>
 
-                {/* Bottom Row: Active Incidents (Live) Table */}
-                <div className="w-full">
-                  <IncidentTable
-                    onSelectIncident={(inc) => {
-                      if (inc.evidence_uri) {
-                        setEvidencePreview({ uri: inc.evidence_uri, title: inc.title });
-                      }
-                    }}
-                  />
+                {/* Right 5 Cols: Interactive Tactical Map */}
+                <div className="lg:col-span-5 xl:col-span-5 min-h-[340px] md:min-h-[380px] flex">
+                  <MapPanel isCompactMap={true} />
                 </div>
               </div>
 
-              {/* Tactical Side Bar: Threat Telemetry & KPI Panel */}
-              <aside className="w-full xl:w-72 2xl:w-80 shrink-0 flex flex-col gap-3">
-                <div className="bg-white border border-slate-300 rounded-xl p-3.5 shadow-2xs">
-                  <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-200">
-                    <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-slate-800 font-mono">
-                      <Radar className="w-4 h-4 text-slate-700" />
-                      <span>Threat Telemetry</span>
-                    </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 border border-slate-300 text-slate-700 font-bold">
-                      LIVE
-                    </span>
-                  </div>
-                  <ThreatSummary />
-                </div>
-              </aside>
+              {/* Bottom Row: Active Incidents (Live) Table */}
+              <div className="w-full">
+                <IncidentTable
+                  onSelectIncident={(inc) => {
+                    if (inc.evidence_uri) {
+                      setEvidencePreview({ uri: inc.evidence_uri, title: inc.title });
+                    }
+                  }}
+                />
+              </div>
             </div>
           )}
 
@@ -294,10 +277,11 @@ export const AppShell: React.FC = () => {
             </div>
           )}
         </main>
-
-        {/* Government / Defense Portal Tiered Footer */}
-        <Footer />
       </div>
+    </div>
+
+    {/* Government / Defense Portal Tiered Footer (Full screen width, overwriting sidebar at bottom) */}
+    <Footer />
 
       {/* Floating Alert Toasts for Real-Time Warnings */}
       <AlertToast />
