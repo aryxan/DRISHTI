@@ -36,6 +36,7 @@ export type DashboardView =
 
 export const AppShell: React.FC = () => {
   const [activeView, setActiveView] = useState<DashboardView>('cameras');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isHealthModalOpen, setIsHealthModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [evidencePreview, setEvidencePreview] = useState<{ uri: string; title: string } | null>(
@@ -56,22 +57,33 @@ export const AppShell: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-100 text-slate-800 flex flex-row font-sans selection:bg-slate-300 selection:text-slate-900">
       {/* 1. Left Navigation Sidebar: White & Grey Theme */}
-      <aside className="w-60 xl:w-64 bg-slate-200/90 border-r border-slate-300 flex flex-col justify-between p-4 shrink-0 select-none min-h-screen text-slate-700">
-        <div className="flex flex-col gap-5">
-          {/* Top Logo & Title */}
-          <div className="flex items-center gap-2.5 px-1 py-1">
-            <div className="p-1.5 rounded-lg bg-white border border-slate-300 text-slate-800 shadow-xs flex items-center justify-center font-bold">
+      <aside
+        className={`bg-slate-200/90 border-r border-slate-300 flex flex-col justify-between shrink-0 select-none min-h-screen text-slate-700 transition-all duration-300 ease-in-out ${
+          isSidebarOpen ? 'w-60 xl:w-64 p-4' : 'w-0 p-0 overflow-hidden border-r-0'
+        }`}
+      >
+        <div className="flex flex-col gap-5 min-w-[208px]">
+          {/* Top Logo & Title (Clicking DRISHTI icon hides sidebar) */}
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            title="Click DRISHTI icon to hide sidebar"
+            className="flex items-center gap-2.5 px-1 py-1 text-left rounded-xl hover:bg-slate-300/50 transition-all cursor-pointer group"
+          >
+            <div className="p-1.5 rounded-lg bg-white border border-slate-300 text-slate-800 shadow-xs flex items-center justify-center font-bold group-hover:scale-105 group-hover:shadow-sm transition-all">
               <Radio className="w-5 h-5 text-slate-700" />
             </div>
-            <div>
-              <h1 className="text-sm font-bold tracking-wider text-slate-900 font-sans uppercase">
-                DRISHTI
+            <div className="flex-1 min-w-0">
+              <h1 className="text-sm font-bold tracking-wider text-slate-900 font-sans uppercase flex items-center justify-between">
+                <span>DRISHTI</span>
+                <span className="text-[9px] font-mono font-normal text-slate-400 group-hover:text-slate-600 transition-colors">
+                  [Hide]
+                </span>
               </h1>
               <p className="text-[11px] text-slate-500 font-sans font-medium">
                 Command Center
               </p>
             </div>
-          </div>
+          </button>
 
           {/* Sidebar Menu Items */}
           <nav className="flex flex-col gap-1.5">
@@ -114,6 +126,20 @@ export const AppShell: React.FC = () => {
         {/* Top Header Bar: Clean White & Grey Theme */}
         <header className="px-5 py-3.5 bg-white/95 border-b border-slate-200/90 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-20 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
           <div className="flex items-center gap-3">
+            {!isSidebarOpen && (
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                title="Click DRISHTI icon to show sidebar"
+                className="flex items-center gap-2 px-2.5 py-1.5 -ml-1 rounded-xl bg-white hover:bg-slate-50 border border-slate-300/90 text-slate-800 shadow-sm hover:shadow-md transition-all cursor-pointer group"
+              >
+                <div className="p-1 rounded-md bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 group-hover:scale-105 transition-transform">
+                  <Radio className="w-4 h-4 text-slate-700" />
+                </div>
+                <span className="text-xs font-bold font-sans tracking-wider text-slate-900 uppercase">
+                  DRISHTI
+                </span>
+              </button>
+            )}
             <div className="w-2 h-2 rounded-full bg-slate-700 animate-pulse" />
             <div>
               <div className="text-xs font-mono font-bold text-slate-800">
