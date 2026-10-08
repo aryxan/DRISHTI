@@ -13,7 +13,7 @@ export const TimelineView: React.FC = () => {
   const getEventIcon = (type: string) => {
     switch (type) {
       case 'detection':
-        return <Eye className="h-3.5 w-3.5 text-cyan-700" />;
+        return <Eye className="h-3.5 w-3.5 text-slate-600" />;
       case 'ai_analysis':
         return <Sparkles className="h-3.5 w-3.5 text-purple-700" />;
       case 'status_change':
@@ -31,7 +31,7 @@ export const TimelineView: React.FC = () => {
     <div className="bg-white border border-slate-300 rounded-xl p-4 flex flex-col gap-3 shadow-2xs text-slate-900">
       <div className="flex items-center justify-between border-b border-slate-200 pb-2">
         <div className="flex items-center gap-2">
-          <Clock className="h-4 w-4 text-cyan-700" />
+          <Clock className="h-4 w-4 text-slate-600" />
           <span className="text-xs font-mono font-bold text-slate-900 uppercase tracking-wider">
             EVENT TIMELINE & CHRONOLOGICAL AUDIT TRAIL ({events.length})
           </span>

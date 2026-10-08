@@ -57,7 +57,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeTab, onSelectTab }
   ];
 
   return (
-    <aside className="w-60 xl:w-64 bg-slate-200/90 border-r border-slate-300 flex flex-col justify-between p-4 shrink-0 select-none min-h-screen text-slate-700">
+    <aside className="w-60 xl:w-64 bg-slate-200/90 border-r border-slate-300 flex flex-col justify-between p-4 shrink-0 sticky top-0 self-start h-screen overflow-y-auto select-none text-slate-700">
       <div className="flex flex-col gap-5">
         {/* Top Brand Header */}
         <div className="flex items-center gap-2.5 px-1 py-1">
@@ -90,13 +90,13 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ activeTab, onSelectTab }
                 }`}
               >
                 <div className="flex items-center gap-3 truncate">
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-cyan-700' : 'text-slate-500'}`} />
+                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-slate-700' : 'text-slate-500'}`} />
                   <span className="truncate">{item.label}</span>
                 </div>
 
                 {item.badge && (
                   <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${
-                    isActive ? 'bg-cyan-50 text-cyan-800 border border-cyan-200' : 'bg-slate-300/70 text-slate-600'
+                    isActive ? 'bg-slate-100 text-slate-700 border border-slate-300' : 'bg-slate-300/70 text-slate-600'
                   }`}>
                     {item.badge}
                   </span>

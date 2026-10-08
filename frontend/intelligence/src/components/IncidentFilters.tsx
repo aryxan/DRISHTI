@@ -37,7 +37,7 @@ export const IncidentFilters: React.FC = () => {
         </div>
         <button
           onClick={resetFilters}
-          className="flex items-center gap-1 text-[11px] font-mono text-slate-500 hover:text-cyan-700 transition"
+          className="flex items-center gap-1 text-[11px] font-mono text-slate-500 hover:text-slate-800 transition"
         >
           <RotateCcw className="h-3 w-3" /> RESET
         </button>
@@ -52,7 +52,7 @@ export const IncidentFilters: React.FC = () => {
             placeholder="Search by ID, title, camera, or tag..."
             value={filters.searchQuery}
             onChange={(e) => setFilter({ searchQuery: e.target.value })}
-            className="w-full bg-slate-50 border border-slate-300 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-cyan-600 focus:bg-white"
+            className="w-full bg-slate-50 border border-slate-300 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-slate-500 focus:bg-white"
           />
         </div>
 
@@ -72,7 +72,7 @@ export const IncidentFilters: React.FC = () => {
                       : sev === 'high'
                       ? 'bg-amber-100 border-amber-400 text-amber-800'
                       : sev === 'medium'
-                      ? 'bg-cyan-100 border-cyan-400 text-cyan-800'
+                      ? 'bg-blue-100 border-blue-400 text-blue-800'
                       : 'bg-slate-200 border-slate-400 text-slate-800'
                     : 'bg-slate-100 border-slate-300 text-slate-500 hover:text-slate-800'
                 }`}
@@ -94,7 +94,7 @@ export const IncidentFilters: React.FC = () => {
                 onClick={() => toggleStatus(st)}
                 className={`px-2 py-0.5 rounded text-[10px] font-mono capitalize font-bold transition border cursor-pointer ${
                   isSelected
-                    ? 'bg-cyan-100 border-cyan-400 text-cyan-800'
+                    ? 'bg-slate-200 border-slate-500 text-slate-800'
                     : 'bg-slate-100 border-slate-300 text-slate-500 hover:text-slate-800'
                 }`}
               >

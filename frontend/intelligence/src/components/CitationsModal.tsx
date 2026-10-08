@@ -13,7 +13,7 @@ export const CitationsModal: React.FC = () => {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-200 pb-3">
           <div className="flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-cyan-700" />
+            <BookOpen className="h-5 w-5 text-slate-600" />
             <div>
               <h3 className="text-sm font-mono font-bold text-slate-900 uppercase">
                 CITATION INSPECTOR
@@ -36,7 +36,7 @@ export const CitationsModal: React.FC = () => {
           <div className="flex items-center justify-between bg-slate-50 p-2.5 rounded-lg border border-slate-200">
             <div>
               <span className="text-slate-500 uppercase text-[10px] font-bold block">SOURCE TYPE & ID</span>
-              <span className="text-cyan-800 font-bold">{activeCitation.source_type.toUpperCase()} :: {activeCitation.source_id}</span>
+              <span className="text-slate-800 font-bold">{activeCitation.source_type.toUpperCase()} :: {activeCitation.source_id}</span>
             </div>
             {activeCitation.confidence_score && (
               <div className="text-right">
@@ -67,7 +67,7 @@ export const CitationsModal: React.FC = () => {
                 href={activeCitation.url}
                 target="_blank"
                 rel="noreferrer"
-                className="text-cyan-700 hover:underline flex items-center gap-1 font-bold"
+                className="text-slate-700 hover:underline flex items-center gap-1 font-bold"
               >
                 <span>Open Source Link</span>
                 <ExternalLink className="h-3 w-3" />

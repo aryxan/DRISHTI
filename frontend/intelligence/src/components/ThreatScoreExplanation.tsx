@@ -15,7 +15,7 @@ export const ThreatScoreExplanation: React.FC = () => {
   const getDefconLabel = (score: number) => {
     if (score >= 80) return { label: 'DEFCON 1 — CRITICAL BREACH', color: 'text-rose-800 border-rose-300 bg-rose-50' };
     if (score >= 60) return { label: 'DEFCON 2 — HIGH ALERT', color: 'text-amber-800 border-amber-300 bg-amber-50' };
-    if (score >= 40) return { label: 'DEFCON 3 — ELEVATED RISK', color: 'text-cyan-800 border-cyan-300 bg-cyan-50' };
+    if (score >= 40) return { label: 'DEFCON 3 — ELEVATED RISK', color: 'text-blue-800 border-blue-300 bg-blue-50' };
     return { label: 'DEFCON 4 — NORMAL POSTURE', color: 'text-emerald-800 border-emerald-300 bg-emerald-50' };
   };
 
@@ -103,7 +103,7 @@ export const ThreatScoreExplanation: React.FC = () => {
         )}
 
         <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
-          <span className="text-[10px] font-mono text-cyan-800 uppercase font-bold tracking-wider block mb-1">
+          <span className="text-[10px] font-mono text-slate-700 uppercase font-bold tracking-wider block mb-1">
             INTELLIGENCE SYNTHESIS ASSESSMENT
           </span>
           <p className="text-xs text-slate-700 leading-relaxed font-sans">

@@ -15,7 +15,7 @@ const REASON_CODE_DESCRIPTIONS: Record<string, string> = {
   FLOW_BOTTLENECK: 'Throughput capacity degraded by > 50%',
   CROWD_THRESHOLD_EXCEEDED: 'Pedestrian count exceeded safety threshold',
   NO_PARKING_ZONE_STATIONARY: 'Stationary vehicle detected in designated clear emergency lane',
-  CATWALK_DIRECTION_REVERSED: 'Subject moving against designated directional corridor flow'
+  CATWALK_DIRECTION_REVERSED: 'Subject moving against designated directional corridor flow',
 };
 
 export const ReasonCodeChips: React.FC = () => {
@@ -34,7 +34,7 @@ export const ReasonCodeChips: React.FC = () => {
   return (
     <div className="bg-white border border-slate-300 rounded-xl p-3.5 flex flex-col gap-2 shadow-2xs">
       <div className="flex items-center gap-2">
-        <Tag className="h-4 w-4 text-cyan-700" />
+        <Tag className="h-4 w-4 text-slate-600" />
         <span className="text-xs font-mono font-bold text-slate-900 uppercase tracking-wider">
           EXPLAINABLE REASON-CODE TAGS ({selectedIncident.reason_codes.length})
         </span>
@@ -51,8 +51,8 @@ export const ReasonCodeChips: React.FC = () => {
                 onClick={() => handleChipClick(code)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition border cursor-pointer ${
                   isSelected
-                    ? 'bg-cyan-900 text-white border-cyan-700 shadow-xs'
-                    : 'bg-slate-900 border-slate-800 hover:border-cyan-600 text-cyan-400 hover:text-white'
+                    ? 'bg-slate-800 text-white border-slate-700 shadow-xs'
+                    : 'bg-slate-100 border-slate-300 hover:border-slate-500 text-slate-700 hover:text-slate-900'
                 }`}
               >
                 #{code}
@@ -60,8 +60,8 @@ export const ReasonCodeChips: React.FC = () => {
 
               {/* Hover Tooltip */}
               <div className="absolute left-0 bottom-full mb-1.5 hidden group-hover:block z-30 bg-slate-900 border border-slate-700 text-white rounded-lg p-2.5 shadow-xl min-w-[220px] text-[11px] font-sans pointer-events-none">
-                <span className="font-mono text-cyan-400 font-bold block mb-0.5">#{code}</span>
-                <span className="text-slate-200">{description}</span>
+                <span className="font-mono text-slate-300 font-bold block mb-0.5">#{code}</span>
+                <span className="text-slate-400">{description}</span>
               </div>
             </div>
           );

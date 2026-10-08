@@ -13,7 +13,7 @@ export const StatusControls: React.FC = () => {
   const statusList: { status: IncidentStatus; label: string; icon: React.ReactNode; color: string }[] = [
     { status: 'open', label: 'OPEN', icon: <ShieldAlert className="h-3.5 w-3.5" />, color: 'text-rose-800 border-rose-300 bg-rose-50 hover:bg-rose-100' },
     { status: 'acknowledged', label: 'ACKNOWLEDGED', icon: <AlertCircle className="h-3.5 w-3.5" />, color: 'text-amber-800 border-amber-300 bg-amber-50 hover:bg-amber-100' },
-    { status: 'investigating', label: 'INVESTIGATING', icon: <Search className="h-3.5 w-3.5" />, color: 'text-cyan-800 border-cyan-300 bg-cyan-50 hover:bg-cyan-100' },
+    { status: 'investigating', label: 'INVESTIGATING', icon: <Search className="h-3.5 w-3.5" />, color: 'text-blue-800 border-blue-300 bg-blue-50 hover:bg-blue-100' },
     { status: 'review', label: 'REVIEW', icon: <FileCheck className="h-3.5 w-3.5" />, color: 'text-purple-800 border-purple-300 bg-purple-50 hover:bg-purple-100' },
     { status: 'resolved', label: 'RESOLVED', icon: <CheckCircle2 className="h-3.5 w-3.5" />, color: 'text-emerald-800 border-emerald-300 bg-emerald-50 hover:bg-emerald-100' }
   ];
@@ -38,7 +38,7 @@ export const StatusControls: React.FC = () => {
               onClick={() => updateIncidentStatus(selectedIncident.incident_id, item.status)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition border cursor-pointer ${
                 isActive
-                  ? `${item.color} ring-1 ring-cyan-600 shadow-xs font-bold`
+                  ? `${item.color} ring-1 ring-slate-500 shadow-xs font-bold`
                   : 'bg-slate-50 border-slate-300 text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >

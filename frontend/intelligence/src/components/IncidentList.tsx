@@ -10,7 +10,7 @@ export const IncidentList: React.FC = () => {
     <div className="bg-white border border-slate-300 rounded-xl flex flex-col h-full overflow-hidden shadow-2xs">
       <div className="p-3.5 border-b border-slate-300 flex items-center justify-between bg-slate-50">
         <div className="flex items-center gap-2">
-          <AlertTriangle className="h-4 w-4 text-cyan-700" />
+          <AlertTriangle className="h-4 w-4 text-slate-600" />
           <h2 className="text-xs font-mono font-bold uppercase text-slate-900 tracking-wider">
             ACTIVE INCIDENTS QUEUE
           </h2>
@@ -37,7 +37,7 @@ export const IncidentList: React.FC = () => {
                 onClick={() => selectIncident(inc.incident_id)}
                 className={`p-3 rounded-xl border transition-all cursor-pointer relative ${
                   isSelected
-                    ? 'bg-slate-50 border-cyan-600 ring-1 ring-cyan-500/40 shadow-sm'
+                    ? 'bg-slate-50 border-slate-600 ring-1 ring-slate-400/30 shadow-sm'
                     : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/60'
                 }`}
               >
@@ -54,7 +54,7 @@ export const IncidentList: React.FC = () => {
                             ? 'bg-rose-100 text-rose-800 border border-rose-300'
                             : isHigh
                             ? 'bg-amber-100 text-amber-800 border border-amber-300'
-                            : 'bg-cyan-100 text-cyan-800 border border-cyan-300'
+                            : 'bg-blue-50 text-blue-800 border border-blue-200'
                         }`}
                       >
                         {inc.severity}
@@ -75,7 +75,7 @@ export const IncidentList: React.FC = () => {
                         ? 'bg-rose-50 border-rose-300 text-rose-700'
                         : inc.threat_score >= 60
                         ? 'bg-amber-50 border-amber-300 text-amber-700'
-                        : 'bg-cyan-50 border-cyan-300 text-cyan-700'
+                        : 'bg-slate-50 border-slate-300 text-slate-600'
                     }`}
                   >
                     <span className="text-[8px] text-slate-500 font-bold leading-none">SCORE</span>
@@ -87,7 +87,7 @@ export const IncidentList: React.FC = () => {
                 <div className="mt-2.5 pt-2 border-t border-slate-200/80 flex items-center justify-between text-[10px] font-mono text-slate-500">
                   <div className="flex items-center gap-2 truncate">
                     <span className="flex items-center gap-1 text-slate-700 font-medium">
-                      <Video className="h-3 w-3 text-cyan-600" />
+                      <Video className="h-3 w-3 text-slate-500" />
                       {inc.camera_id}
                     </span>
                     <span className="flex items-center gap-1 truncate text-slate-500">

@@ -45,7 +45,7 @@ export const IncidentDetailPanel: React.FC<IncidentDetailPanelProps> = ({ active
                 ? 'bg-rose-50 border-rose-300 text-rose-700'
                 : selectedIncident.threat_score >= 60
                 ? 'bg-amber-50 border-amber-300 text-amber-700'
-                : 'bg-cyan-50 border-cyan-300 text-cyan-700'
+                : 'bg-blue-50 border-blue-300 text-blue-700'
             }`}
           >
             <Shield className="h-6 w-6 mb-0.5" />
@@ -67,7 +67,7 @@ export const IncidentDetailPanel: React.FC<IncidentDetailPanelProps> = ({ active
                     ? 'bg-rose-100 text-rose-800 border-rose-300'
                     : isHigh
                     ? 'bg-amber-100 text-amber-800 border-amber-300'
-                    : 'bg-cyan-100 text-cyan-800 border-cyan-300'
+                    : 'bg-blue-50 text-blue-800 border-blue-200'
                 }`}
               >
                 {selectedIncident.severity}
@@ -83,7 +83,7 @@ export const IncidentDetailPanel: React.FC<IncidentDetailPanelProps> = ({ active
 
             <div className="flex items-center gap-4 text-xs font-mono text-slate-500 flex-wrap">
               <span className="flex items-center gap-1 text-slate-800 font-semibold">
-                <Video className="h-3.5 w-3.5 text-cyan-700" />
+                <Video className="h-3.5 w-3.5 text-slate-500" />
                 {selectedIncident.camera_id}
               </span>
               <span className="flex items-center gap-1 text-slate-700">
@@ -100,10 +100,10 @@ export const IncidentDetailPanel: React.FC<IncidentDetailPanelProps> = ({ active
 
         {/* AI Model Confidence Badge */}
         <div className="flex items-center gap-2 bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-mono text-xs">
-          <Sparkles className="h-4 w-4 text-cyan-700" />
+          <Sparkles className="h-4 w-4 text-slate-600" />
           <div>
             <span className="text-[10px] text-slate-500 font-bold uppercase block">CONFIDENCE</span>
-            <span className="text-cyan-800 font-bold">{(selectedIncident.confidence * 100).toFixed(0)}% ACCURACY</span>
+            <span className="text-slate-800 font-bold">{(selectedIncident.confidence * 100).toFixed(0)}% ACCURACY</span>
           </div>
         </div>
       </div>
@@ -117,8 +117,8 @@ export const IncidentDetailPanel: React.FC<IncidentDetailPanelProps> = ({ active
       {/* 4. Selected Tab View Area */}
       <div className="space-y-4">
         {isDetailLoading && (
-          <div className="flex items-center justify-center p-3 text-xs font-mono text-cyan-800 font-bold gap-2 bg-slate-50 rounded-lg border border-slate-300">
-            <span className="h-2 w-2 rounded-full bg-cyan-600 animate-ping" />
+          <div className="flex items-center justify-center p-3 text-xs font-mono text-slate-700 font-bold gap-2 bg-slate-50 rounded-lg border border-slate-300">
+            <span className="h-2 w-2 rounded-full bg-slate-600 animate-ping" />
             <span>Fetching deep AI reasoning telemetry for {selectedIncident.incident_id}...</span>
           </div>
         )}

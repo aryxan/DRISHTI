@@ -99,7 +99,7 @@ export const OSINTContextCards: React.FC = () => {
                         href={card.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-cyan-700 hover:text-cyan-900 flex items-center gap-0.5 font-bold"
+                        className="text-slate-600 hover:text-slate-900 flex items-center gap-0.5 font-bold"
                       >
                         <ExternalLink className="h-3 w-3" />
                       </a>

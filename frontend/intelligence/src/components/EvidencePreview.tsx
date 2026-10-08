@@ -10,29 +10,29 @@ export const EvidencePreview: React.FC = () => {
   if (!selectedIncident) return null;
 
   return (
-    <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-3 flex flex-col gap-2">
+    <div className="bg-white border border-slate-300 rounded-xl p-3 flex flex-col gap-2 shadow-2xs">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Film className="h-4 w-4 text-cyan-400" />
-          <span className="text-xs font-mono font-bold text-slate-200 uppercase tracking-wider">
+          <Film className="h-4 w-4 text-slate-600" />
+          <span className="text-xs font-mono font-bold text-slate-800 uppercase tracking-wider">
             FORENSIC EVIDENCE CLIP PREVIEW
           </span>
         </div>
 
-        <span className="flex items-center gap-1 text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded">
+        <span className="flex items-center gap-1 text-[10px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-300 px-2 py-0.5 rounded">
           <ShieldCheck className="h-3 w-3" /> SHA-256 VERIFIED INTEGRITY
         </span>
       </div>
 
       {/* Simulated Video Player Surface */}
-      <div className="relative w-full h-[200px] bg-slate-950 rounded-lg overflow-hidden border border-slate-800 flex items-center justify-center group">
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/60 z-10" />
+      <div className="relative w-full h-[200px] bg-slate-900 rounded-lg overflow-hidden border border-slate-700 flex items-center justify-center group">
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/60 z-10" />
 
         {/* Video Frame Overlay Simulation */}
         <div className="text-center space-y-2 z-20">
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="h-12 w-12 rounded-full bg-cyan-950/90 border border-cyan-400 text-cyan-300 flex items-center justify-center hover:scale-105 transition shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+            className="h-12 w-12 rounded-full bg-slate-700 border border-slate-500 text-white flex items-center justify-center hover:scale-105 hover:bg-slate-600 transition shadow-md"
           >
             {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 ml-0.5" />}
           </button>
@@ -42,14 +42,14 @@ export const EvidencePreview: React.FC = () => {
         </div>
 
         {/* Player Controls & Scrubber Bar */}
-        <div className="absolute bottom-0 left-0 right-0 p-2 z-30 bg-slate-950/90 border-t border-slate-800/80 flex flex-col gap-1.5">
+        <div className="absolute bottom-0 left-0 right-0 p-2 z-30 bg-slate-900/90 border-t border-slate-700/80 flex flex-col gap-1.5">
           <input
             type="range"
             min="0"
             max="100"
             value={progress}
             onChange={(e) => setProgress(Number(e.target.value))}
-            className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+            className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-slate-400"
           />
 
           <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
@@ -64,12 +64,12 @@ export const EvidencePreview: React.FC = () => {
               </span>
               <button
                 onClick={() => alert(`Downloading evidence clip: ${selectedIncident.evidence_uri}`)}
-                className="p-1 hover:text-cyan-400 transition"
+                className="p-1 hover:text-white transition"
                 title="Download forensic evidence clip"
               >
                 <Download className="h-3.5 w-3.5" />
               </button>
-              <button className="p-1 hover:text-cyan-400 transition" title="Expand Fullscreen">
+              <button className="p-1 hover:text-white transition" title="Expand Fullscreen">
                 <Maximize2 className="h-3.5 w-3.5" />
               </button>
             </div>

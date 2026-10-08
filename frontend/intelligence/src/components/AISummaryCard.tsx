@@ -32,7 +32,7 @@ export const AISummaryCard: React.FC = () => {
       {/* Header Badge */}
       <div className="flex items-center justify-between border-b border-slate-200 pb-3">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-cyan-50 text-cyan-700 border border-cyan-300">
+          <div className="p-1.5 rounded-lg bg-slate-100 text-slate-700 border border-slate-300">
             <Sparkles className="h-4 w-4" />
           </div>
           <div>
@@ -47,7 +47,7 @@ export const AISummaryCard: React.FC = () => {
 
         <div className="flex items-center gap-2">
           <span className="flex items-center gap-1 text-[10px] font-mono bg-slate-100 border border-slate-300 px-2 py-1 rounded text-slate-700 font-bold">
-            <Cpu className="h-3 w-3 text-cyan-600" />
+            <Cpu className="h-3 w-3 text-slate-500" />
             {summary.model_version}
           </span>
           <span className="text-[10px] font-mono bg-emerald-50 border border-emerald-300 px-2 py-1 rounded text-emerald-800 font-bold">
@@ -65,14 +65,14 @@ export const AISummaryCard: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Key Findings */}
         <div className="bg-slate-50/80 border border-slate-200 rounded-lg p-3">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-cyan-800 mb-2">
-            <CheckSquare className="h-3.5 w-3.5 text-cyan-600" />
+          <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-slate-700 mb-2">
+            <CheckSquare className="h-3.5 w-3.5 text-slate-500" />
             <span>KEY FINDINGS</span>
           </div>
           <ul className="space-y-1.5 text-xs text-slate-700 font-sans">
             {summary.key_findings.map((finding, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <span className="text-cyan-600 font-bold">•</span>
+                <span className="text-slate-500 font-bold">•</span>
                 <span>{finding}</span>
               </li>
             ))}
@@ -100,16 +100,16 @@ export const AISummaryCard: React.FC = () => {
       {summary.citations && summary.citations.length > 0 && (
         <div className="pt-2 border-t border-slate-200 flex items-center gap-2 flex-wrap text-xs">
           <div className="flex items-center gap-1 text-[10px] font-mono text-slate-500 uppercase font-bold mr-1">
-            <BookOpen className="h-3.5 w-3.5 text-cyan-600" />
+            <BookOpen className="h-3.5 w-3.5 text-slate-500" />
             <span>SUPPORTING CITATIONS ({summary.citations.length}):</span>
           </div>
           {summary.citations.map((cit) => (
             <button
               key={cit.citation_id}
               onClick={() => openCitation(cit)}
-              className="px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 border border-slate-300 text-[10px] font-mono text-cyan-800 font-semibold transition flex items-center gap-1 cursor-pointer"
+              className="px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 border border-slate-300 text-[10px] font-mono text-slate-800 font-semibold transition flex items-center gap-1 cursor-pointer"
             >
-              <span className="text-cyan-600">[{cit.source_type.toUpperCase()}]</span>
+              <span className="text-slate-600">[{cit.source_type.toUpperCase()}]</span>
               <span className="truncate max-w-[140px]">{cit.title}</span>
             </button>
           ))}
