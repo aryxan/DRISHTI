@@ -122,14 +122,14 @@ export const Footer: React.FC = () => {
       {/* 2. Middle Emblem / Partner Ribbon (White band, full-width, compact scaling) */}
       <div className="w-full bg-white border-y border-slate-300 py-2.5 px-4 md:px-6 overflow-x-auto shadow-2xs">
         <div className="w-full flex items-center justify-between gap-4 min-w-[720px] text-slate-800">
-          {/* Badge 1: Govt of India */}
+          {/* Badge 1: Central Command */}
           <div className="flex items-center gap-2 shrink-0">
             <div className="w-7 h-7 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center">
               <Shield className="w-3.5 h-3.5 text-slate-800" />
             </div>
             <div className="flex flex-col text-left leading-tight">
-              <span className="text-[11px] font-bold text-slate-900">Government of India</span>
-              <span className="text-[9px] text-slate-500 uppercase font-mono">Central Surveillance Grid</span>
+              <span className="text-[11px] font-bold text-slate-900">Central Command Operations</span>
+              <span className="text-[9px] text-slate-500 uppercase font-mono">Integrated Defense Grid</span>
             </div>
           </div>
 
@@ -234,7 +234,7 @@ export const Footer: React.FC = () => {
             <strong className="text-slate-200 underline decoration-slate-600 underline-offset-2">
               National Informatics Centre (NIC)
             </strong>
-            , Ministry of Electronics & Information Technology, Government of India
+            , Ministry of Electronics & Information Technology
           </p>
           <div className="flex items-center justify-center gap-2 text-slate-500 font-mono text-[9px] mt-0.5">
             <span>Last Updated: <strong className="text-slate-300">Oct 08, 2026</strong></span>
@@ -248,10 +248,6 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-slate-300">
             <span className="text-[9px] text-slate-500 font-mono">Framework:</span>
             <span className="font-bold text-white text-[10px]">S3WaaS</span>
-          </div>
-
-          <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-slate-300">
-            <span className="font-bold text-white text-[10px]">NIC Certified</span>
           </div>
 
           <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-slate-300">
