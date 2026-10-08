@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import type { UserRole } from '../types/auth';
-import { Shield, LogOut, Award, CheckCircle2 } from 'lucide-react';
+import { type UserRole, getRolePrivileges } from '../types/auth';
+import { Shield, LogOut, Award, CheckCircle2, Lock, Key } from 'lucide-react';
 
 interface UserMenuProps {
   onOpenLogin?: () => void;
@@ -53,37 +53,10 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onOpenLogin }) => {
   }, [isOpen]);
 
   const roles: UserRole[] = ['OPERATOR', 'ADMIN', 'ANALYST', 'VIEWER'];
-
-  const getOperatorDesignation = (role: UserRole) => {
-    switch (role) {
-      case 'OPERATOR':
-        return 'Tactical Surveillance Operator';
-      case 'ADMIN':
-        return 'Command Center Administrator';
-      case 'ANALYST':
-        return 'Senior Threat Intelligence Analyst';
-      case 'VIEWER':
-        return 'Surveillance Observer / Field Agent';
-      default:
-        return 'Command Center Operator';
-    }
-  };
-
-  const getRoleBadgeColor = (role: UserRole) => {
-    switch (role) {
-      case 'ADMIN':
-        return 'bg-purple-100 text-purple-800 border-purple-300';
-      case 'OPERATOR':
-        return 'bg-blue-100 text-blue-800 border-blue-300';
-      case 'ANALYST':
-        return 'bg-amber-100 text-amber-800 border-amber-300';
-      case 'VIEWER':
-        return 'bg-slate-100 text-slate-700 border-slate-300';
-    }
-  };
+  const privilegeConfig = user ? getRolePrivileges(user.role) : null;
 
   // If unauthenticated: Profile icon triggers login
-  if (!isAuthenticated || !user) {
+  if (!isAuthenticated || !user || !privilegeConfig) {
     return (
       <div className="relative" ref={menuRef}>
         <button
@@ -105,7 +78,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onOpenLogin }) => {
       {/* Profile Icon matching user reference image */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        title="Operator Profile"
+        title="Operator Profile & Privileges"
         className="relative p-0.5 rounded-full text-slate-800 hover:text-black hover:scale-105 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-400/40"
       >
         <ProfileAvatarIcon className="w-7 h-7 text-slate-900 hover:text-black transition-colors" />
@@ -113,7 +86,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onOpenLogin }) => {
 
       {/* Profile Dropdown Popover */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-72 bg-white border border-slate-300 rounded-xl shadow-xl p-4 z-50 animate-in fade-in slide-in-from-top-1 text-slate-800">
+        <div className="absolute right-0 mt-2 w-84 bg-white border border-slate-300 rounded-xl shadow-2xl p-4 z-50 animate-in fade-in slide-in-from-top-1 text-slate-800">
           {/* Header with Avatar & Name */}
           <div className="flex items-center gap-3 pb-3 border-b border-slate-200">
             <div className="w-10 h-10 rounded-full flex items-center justify-center text-slate-900 shrink-0">
@@ -136,30 +109,81 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onOpenLogin }) => {
           <div className="mt-3 p-3 rounded-lg bg-slate-50 border border-slate-200 flex flex-col gap-1.5 shadow-2xs">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold flex items-center gap-1">
-                <Award className="w-3 h-3 text-slate-600" />
+                <Award className="w-3.5 h-3.5 text-slate-600" />
                 Designation
               </span>
               <span
-                className={`text-[10px] font-mono px-2 py-0.5 rounded border font-bold ${getRoleBadgeColor(
-                  user.role
-                )}`}
+                className={`text-[10px] font-mono px-2 py-0.5 rounded border font-bold ${privilegeConfig.clearanceBadge}`}
               >
                 {user.role}
               </span>
             </div>
-            <div className="text-xs font-bold text-slate-800">
-              {getOperatorDesignation(user.role)}
+            <div className="text-xs font-bold text-slate-900">
+              {privilegeConfig.designation}
             </div>
-            <div className="text-[10px] font-mono text-slate-500 flex items-center gap-1 mt-0.5">
-              <Shield className="w-3 h-3 text-emerald-600" />
-              <span>CLEARANCE: LEVEL-4 RESTRICTED</span>
+            <div className="text-[10px] font-mono text-slate-600 flex items-center gap-1.5 mt-0.5 font-medium">
+              <Shield className="w-3.5 h-3.5 text-slate-700 shrink-0" />
+              <span>{privilegeConfig.clearanceLevel}</span>
+            </div>
+            <p className="text-[10px] text-slate-500 italic mt-0.5 leading-snug">
+              {privilegeConfig.description}
+            </p>
+          </div>
+
+          {/* Role-Specific Privileges & Authorizations */}
+          <div className="mt-3">
+            <div className="flex items-center justify-between mb-1.5 px-0.5">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold flex items-center gap-1">
+                <Key className="w-3.5 h-3.5 text-slate-600" />
+                Access Privileges
+              </span>
+              <span className="text-[9px] font-mono text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200 font-medium">
+                {privilegeConfig.privileges.filter((p) => p.allowed).length}/{privilegeConfig.privileges.length} Active
+              </span>
+            </div>
+
+            <div className="space-y-1 max-h-48 overflow-y-auto pr-0.5">
+              {privilegeConfig.privileges.map((priv) => (
+                <div
+                  key={priv.id}
+                  className={`p-2 rounded-lg border text-[11px] flex items-center justify-between gap-2 transition-all ${
+                    priv.allowed
+                      ? 'bg-emerald-50/70 border-emerald-200/80 text-emerald-950'
+                      : 'bg-slate-50 border-slate-200/70 text-slate-400 opacity-75'
+                  }`}
+                >
+                  <div className="flex items-center gap-2 min-w-0">
+                    {priv.allowed ? (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    ) : (
+                      <Lock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    )}
+                    <span
+                      className={`truncate font-medium ${
+                        priv.allowed ? 'text-slate-800' : 'text-slate-500 line-through'
+                      }`}
+                    >
+                      {priv.label}
+                    </span>
+                  </div>
+                  <span
+                    className={`text-[9px] font-mono px-1.5 py-0.5 rounded uppercase font-bold shrink-0 ${
+                      priv.allowed
+                        ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                        : 'bg-slate-200 text-slate-600 border border-slate-300'
+                    }`}
+                  >
+                    {priv.allowed ? 'GRANT' : priv.scope}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* RBAC Role Switcher (Testing) */}
-          <div className="mt-3">
+          <div className="mt-3 pt-2 border-t border-slate-200">
             <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold mb-1.5 px-0.5">
-              Switch Role (RBAC)
+              Switch Designation (Testing)
             </div>
             <div className="grid grid-cols-2 gap-1.5">
               {roles.map((r) => (
@@ -168,7 +192,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onOpenLogin }) => {
                   onClick={() => {
                     switchRole(r);
                   }}
-                  className={`px-2.5 py-1.5 text-[11px] font-mono rounded-lg border flex items-center justify-between transition-colors cursor-pointer ${
+                  className={`px-2 py-1.5 text-[10px] font-mono rounded-lg border flex items-center justify-between transition-colors cursor-pointer ${
                     user.role === r
                       ? 'bg-slate-900 border-slate-900 text-white font-bold shadow-2xs'
                       : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'
@@ -182,7 +206,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onOpenLogin }) => {
           </div>
 
           {/* Exit / Sign Out Button */}
-          <div className="mt-3 pt-3 border-t border-slate-200">
+          <div className="mt-3 pt-2.5 border-t border-slate-200">
             <button
               onClick={() => {
                 logout();
