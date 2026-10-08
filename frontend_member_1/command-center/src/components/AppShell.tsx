@@ -10,6 +10,7 @@ import { SystemHealth } from './SystemHealth';
 import { EvidenceModal } from './EvidenceModal';
 import { LoginModal } from './LoginModal';
 import { UserMenu } from './UserMenu';
+import { Footer } from './Footer';
 import { CurrentTime } from './CurrentTime';
 import {
   Activity,
@@ -294,33 +295,8 @@ export const AppShell: React.FC = () => {
           )}
         </main>
 
-        {/* Command Center Tactical Footer */}
-        <footer className="mt-auto bg-white/95 border-t border-slate-300 px-5 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 font-sans shadow-2xs">
-          <div className="flex items-center gap-4 flex-wrap">
-            <div className="flex items-center gap-2 font-mono text-[11px] font-semibold text-slate-800">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>DEFENSE GRID: OPERATIONAL</span>
-            </div>
-            <span className="text-slate-300 hidden sm:inline">|</span>
-            <div className="text-[11px] font-mono text-slate-500">
-              SECURITY: <span className="font-semibold text-slate-700">RESTRICTED // LEVEL-4</span>
-            </div>
-            <span className="text-slate-300 hidden md:inline">|</span>
-            <div className="text-[11px] font-mono text-slate-500 hidden md:flex items-center gap-3">
-              <span>LATENCY: <strong className="text-slate-800 font-mono">24ms</strong></span>
-              <span>GLOBAL FPS: <strong className="text-slate-800 font-mono">29.4</strong></span>
-              <span>UPTIME: <strong className="text-emerald-600 font-mono">99.98%</strong></span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 text-[11px] font-mono text-slate-500">
-            <span>DRISHTI Command Center</span>
-            <span className="text-slate-300">•</span>
-            <span>v1.0.4</span>
-            <span className="text-slate-300">•</span>
-            <span className="text-slate-600 font-medium">UTC+05:30</span>
-          </div>
-        </footer>
+        {/* Government / Defense Portal Tiered Footer */}
+        <Footer />
       </div>
 
       {/* Floating Alert Toasts for Real-Time Warnings */}
