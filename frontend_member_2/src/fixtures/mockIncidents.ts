@@ -1,0 +1,98 @@
+import { Incident } from '../types/incident';
+
+export const mockIncidents: Incident[] = [
+  {
+    incident_id: "inc-1042",
+    event_id: "EVT-1042",
+    title: "Restricted Zone Perimeter Breach & Unattended Package",
+    severity: "critical",
+    threat_score: 88,
+    confidence: 0.94,
+    camera_id: "CAM-07",
+    location_name: "Perimeter Restricted Boundary Zone 4",
+    timestamp_start: "2026-10-06T02:13:00Z",
+    timestamp_end: null,
+    status: "open",
+    reason_codes: [
+      "ZONE_INTRUSION",
+      "PERIMETER_CROSSING",
+      "UNATTENDED_OBJECT",
+      "NIGHTTIME_ANOMALY"
+    ],
+    evidence_uri: "/evidence/clips/clip_inc_1042_20261006_021300.mp4"
+  },
+  {
+    incident_id: "inc-1041",
+    event_id: "EVT-1041",
+    title: "Suspicious Vehicle Unauthorized Dwell near Access Ramp",
+    severity: "medium",
+    threat_score: 58,
+    confidence: 0.88,
+    camera_id: "CAM-03",
+    location_name: "Tier 3 Access Vault Ramp",
+    timestamp_start: "2026-10-06T01:52:00Z",
+    timestamp_end: null,
+    status: "review",
+    reason_codes: [
+      "SUSPICIOUS_VEHICLE",
+      "UNAUTHORIZED_DWELL",
+      "PLATE_NOT_REGISTERED"
+    ],
+    evidence_uri: "/evidence/clips/clip_inc_1041_20261006_015200.mp4"
+  },
+  {
+    incident_id: "inc-1040",
+    event_id: "EVT-1040",
+    title: "Pedestrian Crowd Surge & Flow Anomaly",
+    severity: "high",
+    threat_score: 72,
+    confidence: 0.91,
+    camera_id: "CAM-05",
+    location_name: "North Gate Pedestrian Plaza",
+    timestamp_start: "2026-10-06T01:30:00Z",
+    timestamp_end: null,
+    status: "investigating",
+    reason_codes: [
+      "CROWD_ANOMALY",
+      "SURGE_DETECTION",
+      "FLOW_BOTTLENECK"
+    ],
+    evidence_uri: "/evidence/clips/clip_inc_1040_20261006_013000.mp4"
+  },
+  {
+    incident_id: "inc-10425",
+    event_id: "evt-10422",
+    title: "High Crowd Density Threshold Exceeded",
+    severity: "medium",
+    threat_score: 64,
+    confidence: 0.92,
+    camera_id: "cam-02-main-gate",
+    location_name: "Main Access Control Point A",
+    timestamp_start: "2026-10-05T22:20:00Z",
+    timestamp_end: null,
+    status: "acknowledged",
+    reason_codes: [
+      "CROWD_THRESHOLD_EXCEEDED",
+      "FLOW_RATE_BOTTLENECK"
+    ],
+    evidence_uri: "/evidence/clips/clip_inc_10425_20261005_222000.mp4"
+  },
+  {
+    incident_id: "inc-10424",
+    event_id: "evt-10419",
+    title: "Unidentified Cargo Truck Idle in Transit Lane",
+    severity: "low",
+    threat_score: 34,
+    confidence: 0.84,
+    camera_id: "cam-04-cargo-bay",
+    location_name: "South Logistics Yard",
+    timestamp_start: "2026-10-05T22:05:40Z",
+    timestamp_end: "2026-10-05T22:28:15Z",
+    status: "resolved",
+    reason_codes: [
+      "NO_PARKING_ZONE_STATIONARY",
+      "PLATE_NOT_PRE_REGISTERED"
+    ],
+    evidence_uri: "/evidence/clips/clip_inc_10424_20261005_220540.mp4"
+  }
+];
